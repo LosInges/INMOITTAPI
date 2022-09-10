@@ -1,0 +1,11 @@
+FROM node:16-alpine
+
+RUN git clone https://github.com/Ing-JuanMata/INMOITTAPI.git
+
+WORKDIR /INMOITTAPI
+
+RUN npm i
+
+EXPOSE 3001
+
+CMD npm start
