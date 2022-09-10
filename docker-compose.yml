@@ -10,7 +10,7 @@ services:
     networks:
       - app
   db:
-    image: mysql:8.0.28
+    image: mysql:8.0.30
     environment:
       MYSQL_ROOT_PASSWORD: 'mysql'
     ports:
