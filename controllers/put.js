@@ -15,7 +15,7 @@ const putCuenta = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -35,7 +35,7 @@ const putCliente = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -58,7 +58,7 @@ const putGerente = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -73,7 +73,7 @@ const putAdministrador = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -94,7 +94,7 @@ const putValuador = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -115,7 +115,7 @@ const putAgente = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -130,7 +130,7 @@ const putCodigoPostal = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -145,7 +145,7 @@ const putAdeudo = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -160,7 +160,7 @@ const putServicio = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -185,7 +185,7 @@ const putInmueble = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -200,7 +200,7 @@ const putAdeudoInmueble = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };

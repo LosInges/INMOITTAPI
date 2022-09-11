@@ -1,17 +1,17 @@
-const conectar = require("./conexion");
-const fetch = require("node-fetch");
+const conectar = require('./conexion');
+const fetch = require('node-fetch');
 
 const deleteCliente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM cliente WHERE correo = ?",
+    'DELETE FROM cliente WHERE correo = ?',
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -20,14 +20,14 @@ const deleteCliente = (req, res) => {
 const deleteAdministrador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM administrador WHERE correo = ?",
+    'DELETE FROM administrador WHERE correo = ?',
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -36,14 +36,14 @@ const deleteAdministrador = (req, res) => {
 const deleteGerente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM gerente_proyectos WHERE correo = ?",
+    'DELETE FROM gerente_proyectos WHERE correo = ?',
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -52,14 +52,14 @@ const deleteGerente = (req, res) => {
 const deleteValuador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM valuador WHERE correo = ?",
+    'DELETE FROM valuador WHERE correo = ?',
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -68,14 +68,14 @@ const deleteValuador = (req, res) => {
 const deleteAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM agente_ventas WHERE correo = ?",
+    'DELETE FROM agente_ventas WHERE correo = ?',
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -84,7 +84,7 @@ const deleteAgente = (req, res) => {
 const deleteAdeudo = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM adeudo WHERE idadeudo = ?",
+    'DELETE FROM adeudo WHERE idadeudo = ?',
     [req.body.idAdeudo],
     (err, results, fields) => {
       if (err) res.json({ err });
@@ -97,14 +97,14 @@ const deleteAdeudo = (req, res) => {
 const deleteAdeudoInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM adeudos_inmueble WHERE idadeudo = ? AND idinmueble = ?",
+    'DELETE FROM adeudos_inmueble WHERE idadeudo = ? AND idinmueble = ?',
     [req.body.idAdeudo, req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -113,14 +113,14 @@ const deleteAdeudoInmueble = (req, res) => {
 const deleteServicio = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM servicio WHERE idServicio = ?",
+    'DELETE FROM servicio WHERE idServicio = ?',
     [req.body.idServicio],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -129,14 +129,14 @@ const deleteServicio = (req, res) => {
 const deleteServicioInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM servicio_inmueble WHERE idServicio = ? AND idinmueble = ?",
+    'DELETE FROM servicio_inmueble WHERE idServicio = ? AND idinmueble = ?',
     [req.body.idServicio, req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -145,14 +145,14 @@ const deleteServicioInmueble = (req, res) => {
 const deleteInmueble = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM inmueble WHERE idinmueble = ?",
+    'DELETE FROM inmueble WHERE idinmueble = ?',
     [req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -160,14 +160,14 @@ const deleteInmueble = (req, res) => {
 const deleteInmuebleValuador = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM inmueble_valuador WHERE idinmueble = ? AND idvaluador = ?",
+    'DELETE FROM inmueble_valuador WHERE idinmueble = ? AND idvaluador = ?',
     [req.body.idInmueble, req.body.idValuador],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -175,14 +175,14 @@ const deleteInmuebleValuador = (req, res) => {
 const deleteInmuebleAgente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM inmueble_agente WHERE idinmueble = ? AND idagente_ventas = ?",
+    'DELETE FROM inmueble_agente WHERE idinmueble = ? AND idagente_ventas = ?',
     [req.body.idInmueble, req.body.idAgente],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -190,14 +190,14 @@ const deleteInmuebleAgente = (req, res) => {
 const deleteInmuebleGerente = (req, res) => {
   const conn = conectar();
   conn.execute(
-    "DELETE FROM proyectos_gerente WHERE idinmueble = ? AND idgerente_proyectos = ?",
+    'DELETE FROM proyectos_gerente WHERE idinmueble = ? AND idgerente_proyectos = ?',
     [req.body.idInmueble, req.body.idGerente],
     (err, results, fields) => {
       if (err) {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
 };
@@ -215,5 +215,5 @@ module.exports = {
   deleteInmueble,
   deleteInmuebleValuador,
   deleteInmuebleAgente,
-  deleteInmuebleGerente
+  deleteInmuebleGerente,
 };

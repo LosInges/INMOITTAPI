@@ -11,7 +11,7 @@ const postCuenta = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -47,7 +47,7 @@ const postCliente = (req, res) => {
             res.json({ err });
             return;
           }
-          res.json({ results });
+          res.json({ results }).header('Access-Control-Allow-Origin', '*');
         }
       );
       conn.end();
@@ -85,7 +85,7 @@ const postGerenteProyectos = (req, res) => {
             res.json({ err });
             return;
           }
-          res.json({ results });
+          res.json({ results }).header('Access-Control-Allow-Origin', '*');
         }
       );
       conn.end();
@@ -117,7 +117,7 @@ const postAdministrador = (req, res) => {
             res.json({ err });
             return;
           }
-          res.json({ results });
+          res.json({ results }).header('Access-Control-Allow-Origin', '*');
         }
       );
       conn.end();
@@ -147,7 +147,7 @@ const postValuador = (req, res) => {
           res.json({ err });
           return;
         }
-        res.json({ results });
+        res.json({ results }).header('Access-Control-Allow-Origin', '*');
       }
     );
     conn.end();
@@ -184,7 +184,7 @@ const postAgenteVentas = (req, res) => {
             res.json({ err });
             return;
           }
-          res.json({ results });
+          res.json({ results }).header('Access-Control-Allow-Origin', '*');
         }
       );
       conn.end();
@@ -201,7 +201,7 @@ const postCodigoPostal = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -217,7 +217,7 @@ const postAdeudo = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -233,7 +233,7 @@ const postServicio = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -258,7 +258,7 @@ const postInmueble = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -274,7 +274,7 @@ const postAdeudoInmueble = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -290,7 +290,7 @@ const postServicioInmueble = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -306,7 +306,7 @@ const postProyectoGerente = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -322,7 +322,7 @@ const postInmuebleValuador = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
@@ -338,7 +338,7 @@ const postInmuebleAgente = (req, res) => {
         res.json({ err });
         return;
       }
-      res.json({ results });
+      res.json({ results }).header('Access-Control-Allow-Origin', '*');
     }
   );
   conn.end();
