@@ -4,10 +4,10 @@ const getCuentas = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT correo, tipo, foto FROM cuenta`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -19,10 +19,10 @@ const getCuenta = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -32,10 +32,10 @@ const getClientes = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM cliente`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -47,10 +47,10 @@ const getCliente = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -62,10 +62,10 @@ const getGerentesProyectos = (req, res) => {
     `SELECT idgerente_proyecto, correo, nombre FROM gerente_proyectos`,
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -78,10 +78,10 @@ const getGerenteProyectos = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -94,10 +94,10 @@ const getProyectosGerente = (req, res) => {
     [req.params.idGerente],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -107,10 +107,10 @@ const getAdministradores = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM administrador`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -122,10 +122,10 @@ const getAdministrador = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -135,10 +135,10 @@ const getAgentesVentas = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM agente_ventas`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -150,10 +150,10 @@ const getAgenteVentas = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -166,10 +166,10 @@ const getProyectosAgente = (req, res) => {
     [req.params.idAgente],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -181,10 +181,10 @@ const getInmuebles = (req, res) => {
     `SELECT i.idinmueble, i.titulo, i.precio_venta, i.precio_renta, i.direccion, i.foto FROM inmueble i INNER JOIN codigo_postal cp ON i.idcodigo_postal = cp.idcodigo_postal`,
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -197,10 +197,10 @@ const getInmueble = (req, res) => {
     [req.params.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -210,10 +210,10 @@ const getServicios = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM servicio`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -225,10 +225,10 @@ const getServiciosInmueble = (req, res) => {
     [req.params.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -238,10 +238,10 @@ const getAdeudos = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM adeudo`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -252,10 +252,10 @@ const getAdeudosInmueble = (req, res) => {
     `SELECT a.idadeudo, a.nombre, ai.cantidad FROM adeudos_inmueble ai INNER JOIN adeudo a ON a.idadeudo = ai.idadeudo INNER JOIN inmueble i ON ai.idinmueble = i.idinmueble WHERE ai.idinmueble = ${req.params.idInmueble}`,
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -265,10 +265,10 @@ const getValuadores = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM valuador`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };
@@ -280,10 +280,10 @@ const getValuador = (req, res) => {
     [req.params.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -296,10 +296,10 @@ const getInmueblesEvaluador = (req, res) => {
     [req.params.idValuador],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -309,10 +309,10 @@ const getCodigoPostal = (req, res) => {
   const conn = conectar();
   conn.query(`SELECT * FROM codigo_postal`, (err, results, fields) => {
     if (err) {
-      res.json({ err });
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
     }
-    res.json({ results }).header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Origin', '*').json({ results });
   });
   conn.end();
 };

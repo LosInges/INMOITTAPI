@@ -8,10 +8,10 @@ const deleteCliente = (req, res) => {
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -24,10 +24,10 @@ const deleteAdministrador = (req, res) => {
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -40,10 +40,10 @@ const deleteGerente = (req, res) => {
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -56,10 +56,10 @@ const deleteValuador = (req, res) => {
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -72,10 +72,10 @@ const deleteAgente = (req, res) => {
     [req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -87,7 +87,7 @@ const deleteAdeudo = (req, res) => {
     'DELETE FROM adeudo WHERE idadeudo = ?',
     [req.body.idAdeudo],
     (err, results, fields) => {
-      if (err) res.json({ err });
+      if (err) res.header('Access-Control-Allow-Origin', '*').json({ err });
       res.send(results);
     }
   );
@@ -101,10 +101,10 @@ const deleteAdeudoInmueble = (req, res) => {
     [req.body.idAdeudo, req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -117,10 +117,10 @@ const deleteServicio = (req, res) => {
     [req.body.idServicio],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -133,10 +133,10 @@ const deleteServicioInmueble = (req, res) => {
     [req.body.idServicio, req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -149,10 +149,10 @@ const deleteInmueble = (req, res) => {
     [req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -164,10 +164,10 @@ const deleteInmuebleValuador = (req, res) => {
     [req.body.idInmueble, req.body.idValuador],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -179,10 +179,10 @@ const deleteInmuebleAgente = (req, res) => {
     [req.body.idInmueble, req.body.idAgente],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -194,10 +194,10 @@ const deleteInmuebleGerente = (req, res) => {
     [req.body.idInmueble, req.body.idGerente],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };

@@ -12,10 +12,10 @@ const putCuenta = (req, res) => {
     [req.body.password, req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -32,10 +32,10 @@ const putCliente = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
   conn.end();
@@ -55,10 +55,10 @@ const putGerente = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -70,10 +70,10 @@ const putAdministrador = (req, res) => {
     [req.body.nombre, req.body.correoN, req.body.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -91,10 +91,10 @@ const putValuador = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -112,10 +112,10 @@ const putAgente = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -127,10 +127,10 @@ const putCodigoPostal = (req, res) => {
     [req.body.asentamiento, req.body.codigoPostal, req.body.idCodigoPostal],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -142,10 +142,10 @@ const putAdeudo = (req, res) => {
     [req.body.nombre, req.body.idAdeudo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -157,10 +157,10 @@ const putServicio = (req, res) => {
     [req.body.nombre, req.body.idServicio],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -182,10 +182,10 @@ const putInmueble = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -197,10 +197,10 @@ const putAdeudoInmueble = (req, res) => {
     [req.body.cantidad, req.body.idInmueble, req.body.idAdeudo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.json({ results }).header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*').json({ results });
     }
   );
 };
@@ -212,7 +212,7 @@ const putPerfil = (req, res) => {
     [`/img/${req.file.filename}`, req.session.correo],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
       helperImg(req.file.path, req.file.filename);
@@ -229,7 +229,7 @@ const putInmuebleImg = (req, res) => {
     [path, req.body.idInmueble],
     (err, results, fields) => {
       if (err) {
-        res.json({ err });
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
       helperImg(req.file.path, req.file.filename);
