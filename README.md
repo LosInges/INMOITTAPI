@@ -1,5 +1,8 @@
 # API INMOITTAPI
 
+## PRIMORDIAL
+Ejecutar el modelo de la base de datos que viene en el proyecto usando alguna herramienta como "Mysql WorkBench" y crear previamente el volumen "mysql-data" usando el comando `docker volume create mysql-data`
+
 ## Pasos a seguir para probar este codigo para produccion
 `
 docker compose build --no-cache
