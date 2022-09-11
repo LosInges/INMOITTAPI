@@ -18,7 +18,7 @@ const postCuenta = (req, res) => {
 };
 
 const postCliente = (req, res) => {
-  fetch("http://localhost:3001/data/cuenta", {
+  fetch("http://localhost:3001/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -55,7 +55,7 @@ const postCliente = (req, res) => {
 };
 
 const postGerenteProyectos = (req, res) => {
-  fetch("http://localhost:3001/data/cuenta", {
+  fetch("http://localhost:3001/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -93,7 +93,7 @@ const postGerenteProyectos = (req, res) => {
 };
 
 const postAdministrador = (req, res) => {
-  fetch("http://localhost:3001/data/cuenta", {
+  fetch("http://localhost:3001/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -125,7 +125,7 @@ const postAdministrador = (req, res) => {
 };
 
 const postValuador = (req, res) => {
-  fetch("http://localhost:3001/data/cuenta", {
+  fetch("http://localhost:3001/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -155,7 +155,7 @@ const postValuador = (req, res) => {
 };
 
 const postAgenteVentas = (req, res) => {
-  fetch("http://localhost:3001/data/cuenta", {
+  fetch("http://localhost:3001/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
