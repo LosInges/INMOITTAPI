@@ -25,7 +25,7 @@ function agregarValuador(event) {
   const idInmueble = window.location.pathname.split("/").slice(-1)[0];
   const idValuador = valuador.options[valuador.selectedIndex].value;
 
-  fetch("http://localhost/data/valuadorInmueble", {
+  fetch("http://localhost:3001/valuadorInmueble", {
     method: "POST",
     body: JSON.stringify({
       idInmueble,
@@ -55,7 +55,7 @@ function actualizarInmueble() {
     return;
   }
 
-  fetch("http://localhost/data/inmueble", {
+  fetch("http://localhost:3001/inmueble", {
     method: "PUT",
     body: JSON.stringify({
       titulo: frm.titulo.value,
@@ -73,7 +73,7 @@ function actualizarInmueble() {
 }
 
 function eliminarInmueble() {
-  fetch("http://localhost/data/inmueble", {
+  fetch("http://localhost:3001/inmueble", {
     method: "DELETE",
     body: JSON.stringify({
       idInmueble: window.location.pathname.split("/").slice(-1)[0],
@@ -88,7 +88,7 @@ function crearInmueble() {
     return;
   }
 
-  fetch("http://localhost/nuevo", {
+  fetch("http://localhost:3000/nuevo", {
     method: "POST",
     body: JSON.stringify({
       titulo: frm.titulo.value,
@@ -105,13 +105,13 @@ function crearInmueble() {
     .then((data) => data.json())
     .then((data) => {
       window.location.replace(
-        `http://localhost/editar/${data.idInmueble}`
+        `http://localhost:3000/editar/${data.idInmueble}`
       );
     });
 }
 
 function consultarValuadores() {
-  fetch("http://localhost/data/valuadores")
+  fetch("http://localhost:3001/valuadores")
     .then((data) => data.json())
     .then((data) => {
       ({ results } = data);
@@ -127,7 +127,7 @@ function consultarValuadores() {
     });
 }
 function consultarServicios() {
-  fetch("http://localhost/data/servicios")
+  fetch("http://localhost:3001/servicios")
     .then((data) => data.json())
     .then((data) => {
       ({ results } = data);
@@ -139,7 +139,7 @@ function consultarServicios() {
       });
     });
   const idInmueble = window.location.pathname.split("/").slice(-1);
-  fetch(`http://localhost/data/servicios/${idInmueble}`)
+  fetch(`http://localhost:3001/servicios/${idInmueble}`)
     .then((data) => data.json())
     .then((data) => {
       ({ results } = data);
@@ -156,7 +156,7 @@ function consultarServicios() {
     });
 }
 function consultarAdeudos() {
-  fetch("http://localhost/data/adeudos")
+  fetch("http://localhost:3001/adeudos")
     .then((data) => data.json())
     .then((data) => {
       ({ results } = data);
@@ -172,7 +172,7 @@ function consultarAdeudos() {
     });
 
   const idInmueble = window.location.pathname.split("/").slice(-1);
-  fetch(`http://localhost/data/adeudos/${idInmueble}`)
+  fetch(`http://localhost:3001/adeudos/${idInmueble}`)
     .then((data) => data.json())
     .then((data) => {
       ({ results } = data);
@@ -194,7 +194,7 @@ function registrarServicio(event) {
   event.preventDefault();
   const nombre = document.getElementById("nombreServicio").value;
   document.getElementById("nombreServicio").value = "";
-  fetch("http://localhost/data/servicio", {
+  fetch("http://localhost:3001/servicio", {
     method: "POST",
     body: JSON.stringify({
       nombre,
@@ -213,7 +213,7 @@ function registrarAdeudo(event) {
   event.preventDefault();
   const nombre = document.getElementById("nombreAdeudo").value;
   document.getElementById("nombreAdeudo").value = "";
-  fetch("http://localhost/data/adeudo", {
+  fetch("http://localhost:3001/adeudo", {
     method: "POST",
     body: JSON.stringify({
       nombre,
@@ -238,7 +238,7 @@ function agregarServicio(event) {
   const idInmueble = window.location.pathname.split("/").slice(-1)[0];
   const idServicio = servicio.options[servicio.selectedIndex].value;
 
-  fetch("http://localhost/data/servicioInmueble", {
+  fetch("http://localhost:3001/servicioInmueble", {
     method: "POST",
     body: JSON.stringify({
       idInmueble,
@@ -265,7 +265,7 @@ function agregarAdeudo(event) {
   const idAdeudo = adeudo.options[adeudo.selectedIndex].value;
   const cantidad = document.getElementById("cantidad").value;
 
-  fetch("http://localhost/data/adeudoInmueble", {
+  fetch("http://localhost:3001/adeudoInmueble", {
     method: "POST",
     body: JSON.stringify({
       idInmueble,
@@ -293,7 +293,7 @@ function eliminarServicio(event) {
     return;
   }
   const idServicio = event.target.value;
-  fetch("http://localhost/data/servicioInmueble", {
+  fetch("http://localhost:3001/servicioInmueble", {
     method: "DELETE",
     body: JSON.stringify({
       idInmueble: window.location.pathname.split("/").slice(-1)[0],
@@ -306,7 +306,7 @@ function eliminarServicio(event) {
 function eliminarAdeudo(event) {
   event.preventDefault();
   const idAdeudo = event.target.value;
-  fetch("http://localhost/data/adeudoInmueble", {
+  fetch("http://localhost:3001/adeudoInmueble", {
     method: "DELETE",
     body: JSON.stringify({
       idInmueble: window.location.pathname.split("/").slice(-1)[0],

@@ -4,7 +4,7 @@ const cuenta = document.getElementById("cuenta");
 datos.addEventListener("submit", function (event) {
   event.preventDefault();
   if (this.codigoPostal) {
-    fetch("http://localhost/perfil", {
+    fetch("http://localhost:3000/perfil", {
       method: "PUT",
       body: JSON.stringify({
         nombre: this.nombre.value,
@@ -24,7 +24,7 @@ datos.addEventListener("submit", function (event) {
     return;
   }
   if (!this.telefono) {
-    fetch("http://localhost/perfil", {
+    fetch("http://localhost:3000/perfil", {
       method: "PUT",
       body: JSON.stringify({
         nombre: this.nombre.value,
@@ -40,7 +40,7 @@ datos.addEventListener("submit", function (event) {
     });
     return;
   }
-  fetch("http://localhost/perfil", {
+  fetch("http://localhost:3000/perfil", {
     method: "PUT",
     body: JSON.stringify({
       nombre: this.nombre.value,
@@ -64,7 +64,7 @@ cuenta.addEventListener("submit", function (event) {
     return;
   }
 
-  fetch("http://localhost/cuenta", {
+  fetch("http://localhost:3000/cuenta", {
     method: "PUT",
     body: JSON.stringify({
       password: this.passwordn.value,

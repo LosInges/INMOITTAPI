@@ -8,7 +8,7 @@ registro.addEventListener("submit", function (event) {
     password: this.password.value,
   };
 
-  fetch("http://localhost/data/administrador", {
+  fetch("http://localhost:3001/administrador", {
     method: "POST",
     body: JSON.stringify(datos),
     headers: { "Content-Type": "application/json" },
@@ -19,6 +19,6 @@ registro.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      window.location.replace("http://localhost/");
+      window.location.replace("http://localhost:3000/");
     });
 });
