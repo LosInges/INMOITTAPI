@@ -3,7 +3,7 @@ const morgan = require("morgan");
 const path = require("path");
 //const session = require("express-session");
 const bodyParser = require("body-parser");
-// const cors = require("cors");
+const cors = require("cors");
 const multer = require("multer");
 const routes = require("./routes");
 //const DataRoutes = require("./api/routes");
@@ -25,7 +25,7 @@ app.set("port", process.env.PORT || 3001);
 
 //middlewares
 app.use(multer({ storage }).single("img"));
-// app.use(cors());
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
