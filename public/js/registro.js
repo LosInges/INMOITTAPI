@@ -1,9 +1,9 @@
-frmCliente = document.getElementById("frmCliente");
-frmGerente = document.getElementById("frmGerente");
-frmAgente = document.getElementById("frmAgente");
-frmValuador = document.getElementById("frmValuador");
+frmCliente = document.getElementById('frmCliente');
+frmGerente = document.getElementById('frmGerente');
+frmAgente = document.getElementById('frmAgente');
+frmValuador = document.getElementById('frmValuador');
 
-frmCliente.addEventListener("submit", function (event) {
+frmCliente.addEventListener('submit', function (event) {
   event.preventDefault();
   const datos = {
     correo: this.correo.value,
@@ -12,10 +12,13 @@ frmCliente.addEventListener("submit", function (event) {
     apellido: this.apellido.value,
     telefono: this.telefono.value,
   };
-  fetch("http://localhost:3001/cliente", {
-    method: "POST",
+  fetch('http://localhost:3001/cliente', {
+    method: 'POST',
     body: JSON.stringify(datos),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
     .then((response) => response.json())
     .then((response) => {
@@ -23,21 +26,24 @@ frmCliente.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      fetch("http://localhost:3000/session", {
-        method: "POST",
+      fetch('http://localhost:3000/session', {
+        method: 'POST',
         body: JSON.stringify({
           correo: datos.correo,
-          tipo: "Cliente",
+          tipo: 'Cliente',
           clave: response.results.insertId,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       }).then(() => {
-        window.location.replace("http://localhost:3000/perfil");
+        window.location.replace('http://localhost:3000/perfil');
       });
     });
 });
 
-frmAgente.addEventListener("submit", function (event) {
+frmAgente.addEventListener('submit', function (event) {
   event.preventDefault();
   const datos = {
     correo: this.correo.value,
@@ -46,10 +52,13 @@ frmAgente.addEventListener("submit", function (event) {
     apellido: this.apellido.value,
     telefono: this.telefono.value,
   };
-  fetch("http://localhost:3001/agente", {
-    method: "POST",
+  fetch('http://localhost:3001/agente', {
+    method: 'POST',
     body: JSON.stringify(datos),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
     .then((response) => response.json())
     .then((response) => {
@@ -57,21 +66,24 @@ frmAgente.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      fetch("http://localhost:3000/session", {
-        method: "POST",
+      fetch('http://localhost:3000/session', {
+        method: 'POST',
         body: JSON.stringify({
           correo: datos.correo,
-          tipo: "Agente",
+          tipo: 'Agente',
           clave: response.results.insertId,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       }).then(() => {
-        window.location.replace("http://localhost:3000/perfil");
+        window.location.replace('http://localhost:3000/perfil');
       });
     });
 });
 
-frmValuador.addEventListener("submit", function (event) {
+frmValuador.addEventListener('submit', function (event) {
   event.preventDefault();
   const datos = {
     correo: this.correo.value,
@@ -80,10 +92,13 @@ frmValuador.addEventListener("submit", function (event) {
     apellido: this.apellido.value,
     telefono: this.telefono.value,
   };
-  fetch("http://localhost:3001/valuador", {
-    method: "POST",
+  fetch('http://localhost:3001/valuador', {
+    method: 'POST',
     body: JSON.stringify(datos),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
     .then((response) => response.json())
     .then((response) => {
@@ -91,21 +106,24 @@ frmValuador.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      fetch("http://localhost:3000/session", {
-        method: "POST",
+      fetch('http://localhost:3000/session', {
+        method: 'POST',
         body: JSON.stringify({
           correo: datos.correo,
-          tipo: "Valuador",
+          tipo: 'Valuador',
           clave: response.results.insertId,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       }).then(() => {
-        window.location.replace("http://localhost:3000/perfil");
+        window.location.replace('http://localhost:3000/perfil');
       });
     });
 });
 
-frmGerente.addEventListener("submit", function (event) {
+frmGerente.addEventListener('submit', function (event) {
   event.preventDefault();
   const datos = {
     correo: this.correo.value,
@@ -115,10 +133,13 @@ frmGerente.addEventListener("submit", function (event) {
     telefono: this.telefono.value,
     codigoPostal: this.codigoPostal.value,
   };
-  fetch("http://localhost:3001/gerente", {
-    method: "POST",
+  fetch('http://localhost:3001/gerente', {
+    method: 'POST',
     body: JSON.stringify(datos),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
     .then((response) => response.json())
     .then((response) => {
@@ -126,16 +147,19 @@ frmGerente.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      fetch("http://localhost:3000/session", {
-        method: "POST",
+      fetch('http://localhost:3000/session', {
+        method: 'POST',
         body: JSON.stringify({
           correo: datos.correo,
-          tipo: "Gerente",
+          tipo: 'Gerente',
           clave: response.results.insertId,
         }),
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
       }).then(() => {
-        window.location.replace("http://localhost:3000/perfil");
+        window.location.replace('http://localhost:3000/perfil');
       });
     });
 });

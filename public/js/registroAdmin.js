@@ -1,6 +1,6 @@
-const registro = document.getElementById("registro");
+const registro = document.getElementById('registro');
 
-registro.addEventListener("submit", function (event) {
+registro.addEventListener('submit', function (event) {
   event.preventDefault();
   const datos = {
     nombre: this.nombre.value,
@@ -8,10 +8,13 @@ registro.addEventListener("submit", function (event) {
     password: this.password.value,
   };
 
-  fetch("http://localhost:3001/administrador", {
-    method: "POST",
+  fetch('http://localhost:3001/administrador', {
+    method: 'POST',
     body: JSON.stringify(datos),
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
   })
     .then((response) => response.json())
     .then((response) => {
@@ -19,6 +22,6 @@ registro.addEventListener("submit", function (event) {
         alert(response.err.sqlMessage);
         return;
       }
-      window.location.replace("http://localhost:3000/");
+      window.location.replace('http://localhost:3000/');
     });
 });
