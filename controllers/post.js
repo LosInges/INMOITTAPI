@@ -8,17 +8,17 @@ const postCuenta = (req, res) => {
     [req.body.correo, req.body.password, req.body.tipo, "/img/perfil.webp"],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
 };
 
 const postCliente = (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://localhost:3001/data/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -44,10 +44,10 @@ const postCliente = (req, res) => {
         ],
         (err, results, fields) => {
           if (err) {
-            res.header('Access-Control-Allow-Origin', '*').json({ err });
+            res.json({ err });
             return;
           }
-          res.header('Access-Control-Allow-Origin', '*').json({ results });
+          res.json({ results });
         }
       );
       conn.end();
@@ -55,7 +55,7 @@ const postCliente = (req, res) => {
 };
 
 const postGerenteProyectos = (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://localhost:3001/data/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -82,10 +82,10 @@ const postGerenteProyectos = (req, res) => {
         ],
         (err, results, fields) => {
           if (err) {
-            res.header('Access-Control-Allow-Origin', '*').json({ err });
+            res.json({ err });
             return;
           }
-          res.header('Access-Control-Allow-Origin', '*').json({ results });
+          res.json({ results });
         }
       );
       conn.end();
@@ -93,7 +93,7 @@ const postGerenteProyectos = (req, res) => {
 };
 
 const postAdministrador = (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://localhost:3001/data/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -114,10 +114,10 @@ const postAdministrador = (req, res) => {
         [req.body.nombre, req.body.correo],
         (err, results, fields) => {
           if (err) {
-            res.header('Access-Control-Allow-Origin', '*').json({ err });
+            res.json({ err });
             return;
           }
-          res.header('Access-Control-Allow-Origin', '*').json({ results });
+          res.json({ results });
         }
       );
       conn.end();
@@ -125,7 +125,7 @@ const postAdministrador = (req, res) => {
 };
 
 const postValuador = (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://localhost:3001/data/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -144,10 +144,10 @@ const postValuador = (req, res) => {
       [req.body.nombre, req.body.apellido, req.body.telefono, req.body.correo],
       (err, results, fields) => {
         if (err) {
-          res.header('Access-Control-Allow-Origin', '*').json({ err });
+          res.json({ err });
           return;
         }
-        res.header('Access-Control-Allow-Origin', '*').json({ results });
+        res.json({ results });
       }
     );
     conn.end();
@@ -155,7 +155,7 @@ const postValuador = (req, res) => {
 };
 
 const postAgenteVentas = (req, res) => {
-  fetch("http://localhost/data/cuenta", {
+  fetch("http://localhost:3001/data/cuenta", {
     method: "POST",
     body: JSON.stringify({
       correo: req.body.correo,
@@ -181,10 +181,10 @@ const postAgenteVentas = (req, res) => {
         ],
         (err, results, fields) => {
           if (err) {
-            res.header('Access-Control-Allow-Origin', '*').json({ err });
+            res.json({ err });
             return;
           }
-          res.header('Access-Control-Allow-Origin', '*').json({ results });
+          res.json({ results });
         }
       );
       conn.end();
@@ -198,10 +198,10 @@ const postCodigoPostal = (req, res) => {
     [req.body.asentamiento, req.body.codigoPostal],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -214,10 +214,10 @@ const postAdeudo = (req, res) => {
     [req.body.nombre],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -230,10 +230,10 @@ const postServicio = (req, res) => {
     [req.body.nombre],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -255,10 +255,10 @@ const postInmueble = (req, res) => {
     ],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -271,10 +271,10 @@ const postAdeudoInmueble = (req, res) => {
     [req.body.idAdeudo, req.body.idInmueble, req.body.cantidad],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -287,10 +287,10 @@ const postServicioInmueble = (req, res) => {
     [req.body.idInmueble, req.body.idServicio],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -303,10 +303,10 @@ const postProyectoGerente = (req, res) => {
     [req.body.idInmueble, req.body.idGerente],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -319,10 +319,10 @@ const postInmuebleValuador = (req, res) => {
     [req.body.idInmueble, req.body.idValuador],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
@@ -335,10 +335,10 @@ const postInmuebleAgente = (req, res) => {
     [req.body.idInmueble, req.body.idAgente],
     (err, results, fields) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').json({ results });
+      res.json({ results });
     }
   );
   conn.end();
