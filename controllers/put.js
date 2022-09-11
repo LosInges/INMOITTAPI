@@ -216,7 +216,7 @@ const putPerfil = (req, res) => {
         return;
       }
       helperImg(req.file.path, req.file.filename);
-      res.redirect("/perfil");
+      res.redirect("http://fronted:3000/perfil");
     }
   );
 };
@@ -233,7 +233,7 @@ const putInmuebleImg = (req, res) => {
         return;
       }
       helperImg(req.file.path, req.file.filename);
-      res.redirect("/");
+      res.redirect("http://fronted:3000/");
     }
   );
 };
