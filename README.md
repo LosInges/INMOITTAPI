@@ -3,6 +3,8 @@
 ## Pasos a seguir para probar este codigo para produccion
 `
 docker compose build --no-cache
+`
+`
 docker compose up --build
 `
 ## Pasos para desarrollar en este proyecto
