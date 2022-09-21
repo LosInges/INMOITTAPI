@@ -1,10 +1,14 @@
-const express = require("express");
-const getControllers = require("./controllers/get");
-const postControllers = require("./controllers/post");
-const deleteControllers = require("./controllers/delete");
-const putCotrollers = require("./controllers/put");
+const express = require('express');
+const getControllers = require('./controllers/get');
+const postControllers = require('./controllers/post');
+const deleteControllers = require('./controllers/delete');
 const router = express.Router();
 
+router.get('/', getControllers.getPrueba);
+router.delete('/', deleteControllers.deletePrueba);
+router.post('/', postControllers.postPrueba);
+
+/*
 //GET
 router.get("/cuentas", getControllers.getCuentas);
 router.get("/cuentas/:correo", getControllers.getCuenta);
@@ -80,5 +84,5 @@ router.put("/adeudoInmueble", putCotrollers.putAdeudoInmueble);
 //POR FACILIDAD TECNICA
 router.post("/perfil", putCotrollers.putPerfil);
 router.post("/inmuebleImg", putCotrollers.putInmuebleImg);
-
+*/
 module.exports = router;

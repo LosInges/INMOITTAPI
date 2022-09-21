@@ -1,15 +1,10 @@
-const mysql = require('mysql2');
+const cassandra = require('cassandra-driver');
+const host = 'localhost'; //Cambiar por 'db' si están desarrollando dentro del contenedor
 
-// Si estamos dentro de un contenedor, al usar docker compose los nombres de los contenedores se vuelven DNS
-host = 'db';
+const conexion = new cassandra.Client({
+  contactPoints: [host],
+  localDataCenter: 'datacenter1', //No tendría porque cambiar
+  keyspace: 'prueba', //nombre de la base de datos a tratar
+});
 
-const conectar = () => {
-  return mysql.createConnection({
-    host,
-    user: 'root',
-    password: 'mysql',
-    database: 'inmoitt',
-  });
-};
-
-module.exports = conectar;
+module.exports = conexion;

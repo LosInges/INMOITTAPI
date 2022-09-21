@@ -10,19 +10,15 @@ services:
     networks:
       - app
   db:
-    image: mysql:8.0.30
-    environment:
-      MYSQL_ROOT_PASSWORD: 'mysql'
+    image: cassandra:4.0.6
     ports:
-      - '3306:3306'
-    expose:
-      - '3306'
+      - '7000:7000'
     volumes:
-      - mysql-data:/var/lib/mysql
+      - inmoitt-data:/var/lib/mysql
     networks:
       - app
 networks:
   app:
 volumes:
-  mysql-data:
+  inmoitt-data:
     external: true
