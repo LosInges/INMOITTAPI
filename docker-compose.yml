@@ -14,7 +14,7 @@ services:
     ports:
       - '7000:7000'
     volumes:
-      - inmoitt-data:/var/lib/mysql
+      - inmoitt-data:/var/lib/cassandra
     networks:
       - app
 networks:
