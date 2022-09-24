@@ -12,7 +12,6 @@ services:
   db:
     image: cassandra:4.0.6
     ports:
-      - '7000-7001:7000-7001'
       - '9042:9042'
     volumes:
       - inmoitt-data:/var/lib/cassandra
