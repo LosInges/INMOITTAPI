@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="INMOITT" id="Project-24b7" database="Cassandra" >
+	<schema name="facturacion" options="facturacion WITH replication = {&#039;class&#039;: &#039;SimpleStrategy&#039;,  &#039;replication_factor&#039;: &#039;1&#039;} AND durable_writes = true" >
+		<table name="compra_email" spec="" >
+			<comment><![CDATA[Q3]]></comment>
+			<column name="email" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="direccion" type="TEXT" jt="12" />
+			<column name="id_compra" type="TEXT" jt="12" />
+			<column name="iva" type="DECIMAL" jt="3" />
+			<column name="monto" type="DECIMAL" jt="3" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="rfc_cliente" type="TEXT" jt="12" />
+			<index name="pk_compra_email" unique="PRIMARY_KEY" >
+				<column name="email" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="compra_nombre" spec="" >
+			<comment><![CDATA[Q2]]></comment>
+			<column name="nombre" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="direccion" type="TEXT" jt="12" />
+			<column name="email" type="TEXT" jt="12" />
+			<column name="id_compra" type="TEXT" jt="12" />
+			<column name="iva" type="DECIMAL" jt="3" />
+			<column name="monto" type="DECIMAL" jt="3" />
+			<column name="rfc_cliente" type="TEXT" jt="12" />
+			<index name="pk_compra_nombre" unique="PRIMARY_KEY" >
+				<column name="nombre" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="compra_rfc" spec="" >
+			<comment><![CDATA[Q1]]></comment>
+			<column name="rfc_cliente" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="direccion" type="TEXT" jt="12" />
+			<column name="email" type="TEXT" jt="12" />
+			<column name="id_compra" type="TEXT" jt="12" />
+			<column name="iva" type="DECIMAL" jt="3" />
+			<column name="monto" type="DECIMAL" jt="3" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<index name="pk_compra_rfc" unique="PRIMARY_KEY" >
+				<column name="rfc_cliente" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="compra_rfc_id" spec="" >
+			<comment><![CDATA[Q4]]></comment>
+			<column name="rfc_cliente" type="TEXT" jt="12" />
+			<column name="id_compra" type="TEXT" jt="12" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="direccion" type="TEXT" jt="12" />
+			<column name="email" type="TEXT" jt="12" />
+			<column name="iva" type="DECIMAL" jt="3" />
+			<column name="monto" type="DECIMAL" jt="3" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<index name="pk_compra_rfc_id" unique="PRIMARY_KEY" >
+				<column name="rfc_cliente" />
+				<column name="id_compra" />
+			</index>
+			<index name="partition_compra_rfc_id" unique="PARTITION" >
+				<column name="rfc_cliente" />
+				<column name="id_compra" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+	</schema>
+	<schema name="inmoitt" options="inmoitt WITH replication = {&#039;class&#039;: &#039;SimpleStrategy&#039;,  &#039;replication_factor&#039;: &#039;1&#039;} AND durable_writes = true" >
+		<table name="cargadores" spec="" >
+			<column name="rfc" type="TEXT" jt="12" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="apellido" type="TEXT" jt="12" />
+			<column name="password" type="TEXT" jt="12" />
+			<column name="telefono" type="TEXT" jt="12" />
+			<index name="pk_cargadores" unique="PRIMARY_KEY" >
+				<column name="rfc" />
+				<column name="nombre" />
+				<column name="apellido" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="nombre" options=" ASC" />
+				<column name="apellido" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C7, F3' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="cliente_inmobiliaria" spec="" >
+			<column name="inmobiliaria" type="TEXT" jt="12" />
+			<column name="correo" type="TEXT" jt="12" />
+			<column name="apellido" type="TEXT" jt="12" />
+			<column name="foto" type="TEXT" jt="12" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<index name="pk_cliente_inmobiliaria" unique="PRIMARY_KEY" >
+				<column name="inmobiliaria" />
+				<column name="correo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="correo" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'I3' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="clientes" spec="" >
+			<column name="correo" type="TEXT" jt="12" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="apellido" type="TEXT" jt="12" />
+			<column name="password" type="TEXT" jt="12" />
+			<index name="pk_clientes" unique="PRIMARY_KEY" >
+				<column name="correo" />
+				<column name="nombre" />
+				<column name="apellido" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="nombre" options=" ASC" />
+				<column name="apellido" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C8' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="fletes" spec="" >
+			<column name="id" type="TEXT" jt="12" />
+			<column name="paquete" type="TEXT" jt="12" />
+			<column name="transporte" type="TEXT" jt="12" />
+			<column name="cliente" type="TEXT" jt="12" />
+			<column name="destino" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="telefono" type="TEXT" jt="12" />
+			<index name="pk_fletes" unique="PRIMARY_KEY" >
+				<column name="id" />
+				<column name="transporte" />
+				<column name="paquete" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="transporte" />
+				<column name="paquete" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = '' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="inmobiliarias" spec="" >
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="estado" type="TEXT" jt="12" />
+			<column name="correo" type="TEXT" jt="12" />
+			<column name="direccion" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="password" type="TEXT" jt="12" />
+			<column name="notarios" type="list&lt;frozen&lt;notario&gt;&gt;" jt="4999545" />
+			<index name="pk_inmobiliarias" unique="PRIMARY_KEY" >
+				<column name="correo" />
+				<column name="estado" />
+				<column name="nombre" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="estado" />
+				<column name="nombre" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C1' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="inmuebles" spec="" >
+			<column name="titulo" type="TEXT" jt="12" />
+			<column name="estado" type="TEXT" jt="12" />
+			<column name="cuartos" type="SMALLINT" jt="5" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="direccion" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="foto" type="TEXT" jt="12" />
+			<column name="metros_cuadrados" type="DECIMAL" jt="3" />
+			<column name="notario" type="frozen&lt;notario&gt;" jt="4999545" />
+			<column name="pisos" type="SMALLINT" jt="5" />
+			<column name="precio_renta" type="DECIMAL" jt="3" />
+			<column name="precio_venta" type="DECIMAL" jt="3" />
+			<column name="servicios" type="SET&lt;TEXT&gt;" jt="4999545" />
+			<index name="pk_inmuebles" unique="PRIMARY_KEY" >
+				<column name="titulo" />
+				<column name="estado" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="estado" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C2, C3, C5, I1, I2' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="inmuebles_cliente" spec="" >
+			<column name="cliente" type="TEXT" jt="12" />
+			<column name="estado" type="TEXT" jt="12" />
+			<column name="titulo" type="TEXT" jt="12" />
+			<column name="acreditado" type="BOOLEAN" jt="16" />
+			<column name="direccion" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="foto" type="TEXT" jt="12" />
+			<column name="metros_cuadrados" type="DECIMAL" jt="3" />
+			<column name="precio_renta" type="DECIMAL" jt="3" />
+			<column name="precio_venta" type="DECIMAL" jt="3" />
+			<index name="pk_inmuebles_cliente" unique="PRIMARY_KEY" >
+				<column name="cliente" />
+				<column name="estado" />
+				<column name="titulo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="estado" options=" ASC" />
+				<column name="titulo" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C9' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="inmuebles_inmobiliaria" spec="" >
+			<column name="inmobiliaria" type="TEXT" jt="12" />
+			<column name="estado" type="TEXT" jt="12" />
+			<column name="titulo" type="TEXT" jt="12" />
+			<column name="direccion" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="foto" type="TEXT" jt="12" />
+			<column name="metros_cuadrados" type="DECIMAL" jt="3" />
+			<column name="precio_renta" type="DECIMAL" jt="3" />
+			<column name="precio_venta" type="DECIMAL" jt="3" />
+			<index name="pk_inmuebles_inmobiliaria" unique="PRIMARY_KEY" >
+				<column name="inmobiliaria" />
+				<column name="estado" />
+				<column name="titulo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="estado" options=" ASC" />
+				<column name="titulo" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'I1' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="items" spec="" >
+			<column name="id" type="TEXT" jt="12" mandatory="y" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="alto" type="DECIMAL" jt="3" />
+			<column name="ancho" type="DECIMAL" jt="3" />
+			<column name="foto" type="TEXT" jt="12" />
+			<index name="pk_items" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = '' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="paquetes" spec="" >
+			<column name="id" type="TEXT" jt="12" />
+			<column name="id_item" type="TEXT" jt="12" />
+			<column name="foto" type="TEXT" jt="12" />
+			<column name="item" type="TEXT" jt="12" />
+			<index name="pk_paquetes" unique="PRIMARY_KEY" >
+				<column name="id" />
+				<column name="id_item" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="id_item" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'C5, F1' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="transportes" spec="" >
+			<comment><![CDATA[C6, F2]]></comment>
+			<column name="matricula" type="TEXT" jt="12" mandatory="y" />
+			<column name="capacidad" type="DECIMAL" jt="3" />
+			<index name="pk_transportes" unique="PRIMARY_KEY" >
+				<column name="matricula" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+	</schema>
+	<schema name="laboratorio_cassandra" options="laboratorio_cassandra WITH replication = {&#039;class&#039;: &#039;SimpleStrategy&#039;,  &#039;replication_factor&#039;: &#039;1&#039;} AND durable_writes = true" >
+		<table name="articulos_id" spec="" >
+			<comment><![CDATA[Q2]]></comment>
+			<column name="id" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_articulos_id" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="articulos_nombre" spec="" >
+			<comment><![CDATA[Q3]]></comment>
+			<column name="nombre" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_articulos_nombre" unique="PRIMARY_KEY" >
+				<column name="nombre" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="carritos_compras" spec="" >
+			<column name="id_usuario" type="TEXT" jt="12" />
+			<column name="estado" type="BOOLEAN" jt="16" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<index name="pk_carritos_compras" unique="PRIMARY_KEY" >
+				<column name="id_usuario" />
+				<column name="estado" />
+				<column name="nombre" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="estado" options=" ASC" />
+				<column name="nombre" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'Q1,U2' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="carritos_id" spec="" >
+			<column name="id_carrito" type="TEXT" jt="12" />
+			<column name="nombre_carrito" type="TEXT" jt="12" />
+			<column name="tiempo" type="TIMESTAMP" jt="93" />
+			<column name="subtotal" type="FLOAT" jt="6" />
+			<column name="cantidad" type="INT" jt="4" />
+			<column name="id_articulo" type="TEXT" jt="12" />
+			<column name="nombre_articulo" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_carritos_id" unique="PRIMARY_KEY" >
+				<column name="id_carrito" />
+				<column name="nombre_carrito" />
+				<column name="tiempo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="nombre_carrito" options=" ASC" />
+				<column name="tiempo" options=" DESC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'Q4, Q5, U1' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+	</schema>
+	<schema name="laboratorio_sismologia" options="laboratorio_sismologia WITH replication = {&#039;class&#039;: &#039;SimpleStrategy&#039;,  &#039;replication_factor&#039;: &#039;1&#039;} AND durable_writes = true" >
+		<table name="medicion" spec="" >
+			<column name="sensor" type="TEXT" jt="12" />
+			<column name="tiempo" type="TIMESTAMP" jt="93" />
+			<column name="valor" type="SMALLINT" jt="5" />
+			<index name="pk_medicion" unique="PRIMARY_KEY" >
+				<column name="sensor" />
+				<column name="tiempo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="tiempo" options=" DESC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'Q3, Q5' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="redes" spec="" >
+			<comment><![CDATA[Q1]]></comment>
+			<column name="nombre" type="TEXT" jt="12" mandatory="y" />
+			<column name="cantidad" type="INT" jt="4" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="region" type="TEXT" jt="12" />
+			<index name="pk_redes" unique="PRIMARY_KEY" >
+				<column name="nombre" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="sensores" spec="" >
+			<column name="red" type="TEXT" jt="12" />
+			<column name="operativo" type="BOOLEAN" jt="16" />
+			<column name="id" type="TEXT" jt="12" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="latitud" type="TEXT" jt="12" />
+			<column name="longitud" type="TEXT" jt="12" />
+			<index name="pk_sensores" unique="PRIMARY_KEY" >
+				<column name="red" />
+				<column name="operativo" />
+				<column name="id" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="operativo" options=" ASC" />
+				<column name="id" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'Q2, Q4' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+	</schema>
+	<schema name="tienda" options="tienda WITH replication = {&#039;class&#039;: &#039;SimpleStrategy&#039;,  &#039;replication_factor&#039;: &#039;1&#039;} AND durable_writes = true" >
+		<table name="articulo" spec="" >
+			<comment><![CDATA[Q2]]></comment>
+			<column name="id" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="nombre" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_articulo" unique="PRIMARY_KEY" >
+				<column name="id" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="articulos_carrito" spec="" >
+			<column name="id_carrito" type="TEXT" jt="12" />
+			<column name="id_articulo" type="TEXT" jt="12" />
+			<column name="nombre_carrito" type="TEXT" jt="12" />
+			<column name="nombre_articulo" type="TEXT" jt="12" />
+			<column name="usuario" type="TEXT" jt="12" />
+			<index name="pk_articulos_carrito" unique="PRIMARY_KEY" >
+				<column name="id_carrito" />
+				<column name="id_articulo" />
+				<column name="nombre_carrito" />
+			</index>
+			<index name="partition_articulos_carrito" unique="PARTITION" >
+				<column name="id_carrito" />
+				<column name="id_articulo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="nombre_carrito" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'U1, Q4' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="carrito_de_usuario" spec="" >
+			<column name="usuario" type="TEXT" jt="12" />
+			<column name="activo" type="BOOLEAN" jt="16" />
+			<column name="nombre_carrito" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<index name="pk_carrito_de_usuario" unique="PRIMARY_KEY" >
+				<column name="usuario" />
+				<column name="activo" />
+				<column name="nombre_carrito" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="activo" options=" ASC" />
+				<column name="nombre_carrito" options=" ASC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'Q1, U2' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="nombre_articulo" spec="" >
+			<comment><![CDATA[Q3]]></comment>
+			<column name="nombre" type="TEXT" jt="12" mandatory="y" />
+			<column name="descripcion" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_nombre_articulo" unique="PRIMARY_KEY" >
+				<column name="nombre" />
+			</index>
+			<options><![CDATA[WITH additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="ticket_carrito" spec="" >
+			<column name="id_carrito" type="TEXT" jt="12" />
+			<column name="id_articulo" type="TEXT" jt="12" />
+			<column name="tiempo" type="TIMESTAMP" jt="93" />
+			<column name="subtotal" type="FLOAT" jt="6" />
+			<column name="cantidad" type="INT" jt="4" />
+			<column name="nombre_articulo" type="TEXT" jt="12" />
+			<column name="precio" type="FLOAT" jt="6" />
+			<index name="pk_ticket_carrito" unique="PRIMARY_KEY" >
+				<column name="id_carrito" />
+				<column name="id_articulo" />
+				<column name="tiempo" />
+			</index>
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="id_articulo" options=" ASC" />
+				<column name="tiempo" options=" DESC" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = 'U1, Q5' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+	</schema>
+	<connector name="Cassandra" database="Cassandra" driver_class="com.wisecoders.dbschema.cassandra.JdbcDriver" driver_jar="cassandrajdbc2.2.jar" driver_desc="Without Authentication" host="localhost" port="9042" user="cassandra" passwd="Y2Fzc2FuZHJh" useSystemProxy="false" />
+	<layout name="Default Layout" id="Layout-210f" confirmed="y" show_relation="columns" >
+		<entity schema="inmoitt" name="cargadores" color="BEF4C4" x="736" y="48" />
+		<entity schema="inmoitt" name="cliente_inmobiliaria" color="BED3F4" x="672" y="256" />
+		<entity schema="inmoitt" name="clientes" color="F4BEF2" x="272" y="304" />
+		<entity schema="inmoitt" name="fletes" color="BEF4C4" x="1008" y="48" />
+		<entity schema="inmoitt" name="inmobiliarias" color="BED3F4" x="848" y="256" />
+		<entity schema="inmoitt" name="inmuebles" color="BEF4F0" x="256" y="48" />
+		<entity schema="inmoitt" name="inmuebles_cliente" color="BEF4F0" x="64" y="48" />
+		<entity schema="inmoitt" name="inmuebles_inmobiliaria" color="BEF4F0" x="48" y="256" />
+		<entity schema="inmoitt" name="items" color="BEF4C4" x="480" y="48" />
+		<entity schema="inmoitt" name="paquetes" color="BEF4C4" x="608" y="48" />
+		<entity schema="inmoitt" name="transportes" color="BEF4C4" x="880" y="48" />
+	</layout>
+</project>
