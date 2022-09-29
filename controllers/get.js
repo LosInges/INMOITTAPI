@@ -1,7 +1,7 @@
 const conectar = require('./conexion');
 
-const getPrueba = (req, res) => {
-  conectar.execute(`SELECT * FROM test`, (err, results) => {
+const getItems = (req, res) => {
+  conectar.execute(`SELECT * FROM items`, (err, results) => {
     if (err) {
       res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
@@ -13,5 +13,5 @@ const getPrueba = (req, res) => {
 };
 
 module.exports = {
-  getPrueba,
+  getItems,
 };

@@ -1,5 +1,5 @@
 const cassandra = require('cassandra-driver');
-const host = 'db'; //Cambiar por 'localhost' si están desarrollando fuera del contenedor
+const host = 'localhost'; //Cambiar por 'localhost' si están desarrollando fuera del contenedor
 
 const conexion = new cassandra.Client({
   contactPoints: [host],

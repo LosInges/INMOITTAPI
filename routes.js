@@ -4,9 +4,9 @@ const postControllers = require('./controllers/post');
 const deleteControllers = require('./controllers/delete');
 const router = express.Router();
 
-router.get('/', getControllers.getPrueba);
-router.delete('/', deleteControllers.deletePrueba);
-router.post('/', postControllers.postPrueba);
+router.get('/', getControllers.getItems);
+router.delete('/', deleteControllers.deleteItem);
+router.post('/', postControllers.postItem);
 
 /*
 //GET

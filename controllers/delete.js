@@ -1,7 +1,15 @@
 const conectar = require('./conexion');
 
-const deletePrueba = (req, res) => {
-  conectar.execute(`DELETE FROM test WHERE id = 1`, (err, results) => {
+const deleteItem = (req, res) => {
+  if (!req.body.id) {
+    res
+      .header('Access-Control-Allow-Origin', '*')
+      .json({ err: 'DATOS INSUFICIENTES' });
+    return;
+  }
+  const query = 'DELETE FROM items WHERE id=?';
+  const params = [req.body.id];
+  conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res.header('Access-Control-Allow-Origin', '*').json({ err });
       return;
@@ -11,5 +19,5 @@ const deletePrueba = (req, res) => {
 };
 
 module.exports = {
-  deletePrueba,
+  deleteItem,
 };
