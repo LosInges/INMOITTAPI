@@ -123,14 +123,73 @@
 			<column name="cliente" type="TEXT" jt="12" />
 			<column name="destino" type="frozen&lt;direccion&gt;" jt="4999545" />
 			<column name="telefono" type="TEXT" jt="12" />
+			<column name="cargadores" type="list&lt;text&gt;" jt="4999545" />
+			<column name="activo" type="BOOLEAN" jt="16" />
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="paquete" options=" ASC" />
+				<column name="transporte" options=" ASC" />
+			</index>
 			<index name="pk_fletes" unique="PRIMARY_KEY" >
+				<column name="activo" />
 				<column name="id" />
+				<column name="paquete" />
 				<column name="transporte" />
+			</index>
+			<index name="partition_fletes" unique="PARTITION" >
+				<column name="activo" />
+				<column name="id" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = '' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="fletes_cliente" spec="" >
+			<column name="cliente" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<column name="paquete" type="TEXT" jt="12" />
+			<column name="transporte" type="TEXT" jt="12" />
+			<column name="destino" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="telefono" type="TEXT" jt="12" />
+			<column name="cargadores" type="list&lt;text&gt;" jt="4999545" />
+			<column name="activo" type="BOOLEAN" jt="16" />
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="id" options=" ASC" />
+				<column name="paquete" options=" ASC" />
+				<column name="transporte" options=" ASC" />
+			</index>
+			<index name="pk_fletes_cliente" unique="PRIMARY_KEY" >
+				<column name="activo" />
+				<column name="cliente" />
+				<column name="id" />
+				<column name="paquete" />
+				<column name="transporte" />
+			</index>
+			<index name="partition_fletes_cliente" unique="PARTITION" >
+				<column name="activo" />
+				<column name="cliente" />
+			</index>
+			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = '' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
+		</table>
+		<table name="fletes_transporte" spec="" >
+			<column name="transporte" type="TEXT" jt="12" />
+			<column name="id" type="TEXT" jt="12" />
+			<column name="paquete" type="TEXT" jt="12" />
+			<column name="cliente" type="TEXT" jt="12" />
+			<column name="destino" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="telefono" type="TEXT" jt="12" />
+			<column name="cargadores" type="list&lt;text&gt;" jt="4999545" />
+			<column name="activo" type="BOOLEAN" jt="16" />
+			<index name="ClusterOrder" unique="SORT" >
+				<column name="id" options=" ASC" />
+				<column name="paquete" options=" ASC" />
+			</index>
+			<index name="pk_fletes_transporte" unique="PRIMARY_KEY" >
+				<column name="activo" />
+				<column name="transporte" />
+				<column name="id" />
 				<column name="paquete" />
 			</index>
-			<index name="ClusterOrder" unique="SORT" >
+			<index name="partition_fletes_transporte" unique="PARTITION" >
+				<column name="activo" />
 				<column name="transporte" />
-				<column name="paquete" />
 			</index>
 			<options><![CDATA[WITH AND additional_write_policy = '99p' AND bloom_filter_fp_chance = 0.01 AND caching = {'keys': 'ALL',  'rows_per_partition': 'NONE'} AND cdc = false AND comment = '' AND compaction = {'class': 'org.apache.cassandra.db.compaction.SizeTieredCompactionStrategy',  'max_threshold': '32',  'min_threshold': '4'} AND compression = {'chunk_length_in_kb': '16',  'class': 'org.apache.cassandra.io.compress.LZ4Compressor'} AND crc_check_chance = 1.0 AND default_time_to_live = 0 AND extensions = {} AND gc_grace_seconds = 864000 AND max_index_interval = 2048 AND memtable_flush_period_in_ms = 0 AND min_index_interval = 128 AND read_repair = 'BLOCKING' AND speculative_retry = '99p']]></options>
 		</table>
@@ -438,13 +497,174 @@
 		<entity schema="inmoitt" name="cargadores" color="BEF4C4" x="736" y="48" />
 		<entity schema="inmoitt" name="cliente_inmobiliaria" color="BED3F4" x="672" y="256" />
 		<entity schema="inmoitt" name="clientes" color="F4BEF2" x="272" y="304" />
-		<entity schema="inmoitt" name="fletes" color="BEF4C4" x="1008" y="48" />
+		<entity schema="inmoitt" name="fletes" color="BEF4C4" x="960" y="48" />
+		<entity schema="inmoitt" name="fletes_cliente" color="BEF4C4" x="1088" y="48" />
+		<entity schema="inmoitt" name="fletes_transporte" color="BEF4C4" x="1216" y="48" />
 		<entity schema="inmoitt" name="inmobiliarias" color="BED3F4" x="848" y="256" />
 		<entity schema="inmoitt" name="inmuebles" color="BEF4F0" x="256" y="48" />
 		<entity schema="inmoitt" name="inmuebles_cliente" color="BEF4F0" x="64" y="48" />
 		<entity schema="inmoitt" name="inmuebles_inmobiliaria" color="BEF4F0" x="48" y="256" />
 		<entity schema="inmoitt" name="items" color="BEF4C4" x="480" y="48" />
 		<entity schema="inmoitt" name="paquetes" color="BEF4C4" x="608" y="48" />
-		<entity schema="inmoitt" name="transportes" color="BEF4C4" x="880" y="48" />
+		<entity schema="inmoitt" name="transportes" color="BEF4C4" x="848" y="48" />
+		<script name="SQL_Editor" id="Editor-1f0" language="SQL" >
+			<string><![CDATA[DROP KEYSPACE INMOITT;
+CREATE KEYSPACE INMOITT WITH REPLICATION={'class':'SimpleStrategy', 'replication_factor':1};
+USE INMOITT;
+
+/*TIPOS DE DATOS*/
+CREATE TYPE notario(
+nombre VARCHAR,
+apellido VARCHAR,
+correo VARCHAR,
+foto VARCHAR
+);
+
+CREATE TYPE direccion(
+calle VARCHAR,
+codigoPostal VARCHAR,
+colonia VARCHAR,
+numeroExterior INT,
+numeroInterior INT
+);
+/**************************************************/
+/*TABLAS SOBRE INMOBILIARIAS*/
+CREATE TABLE INMOBILIARIAS(
+NOMBRE VARCHAR,
+DIRECCION FROZEN<DIRECCION>,
+ESTADO VARCHAR,
+NOTARIOS LIST<FROZEN<NOTARIO>>,
+CORREO VARCHAR,
+PASSWORD VARCHAR,
+PRIMARY KEY(CORREO, ESTADO, NOMBRE)
+)WITH COMMENT='C1';
+
+CREATE TABLE CLIENTE_INMOBILIARIA(
+CORREO VARCHAR,
+INMOBILIARIA VARCHAR,
+NOMBRE VARCHAR,
+APELLIDO VARCHAR,
+FOTO VARCHAR,
+PRIMARY KEY(INMOBILIARIA, CORREO)
+)WITH COMMENT='I3';
+/***************************************************/
+/*TABLAS SOBRE EL CLIENTE*/
+CREATE TABLE CLIENTES(
+CORREO VARCHAR,
+PASSWORD VARCHAR,
+NOMBRE VARCHAR,
+APELLIDO VARCHAR,
+PRIMARY KEY(CORREO, NOMBRE, APELLIDO)
+)WITH COMMENT='C8';
+/*************************************************************/
+/*TABLAS DE FLETES*/
+CREATE TABLE PAQUETES(
+ID VARCHAR,
+ID_ITEM VARCHAR,
+ITEM VARCHAR,
+FOTO VARCHAR,
+PRIMARY KEY(ID, ID_ITEM)
+)WITH COMMENT='C5, F1';
+
+CREATE TABLE CARGADORES(
+RFC VARCHAR,
+NOMBRE VARCHAR,
+APELLIDO VARCHAR,
+PASSWORD VARCHAR,
+TELEFONO VARCHAR,
+PRIMARY KEY(RFC, NOMBRE, APELLIDO)
+)WITH COMMENT='C7, F3';
+
+CREATE TABLE TRANSPORTES(
+MATRICULA VARCHAR PRIMARY KEY,
+CAPACIDAD DECIMAL
+)WITH COMMENT='C6, F2';
+
+CREATE TABLE ITEMS(
+ID VARCHAR PRIMARY KEY,
+NOMBRE VARCHAR,
+ANCHO DECIMAL,
+ALTO DECIMAL,
+FOTO VARCHAR
+);
+
+CREATE TABLE FLETES(
+ACTIVO BOOLEAN,
+ID VARCHAR,
+TRANSPORTE VARCHAR,
+DESTINO FROZEN<DIRECCION>,
+PAQUETE VARCHAR,
+CLIENTE VARCHAR,
+TELEFONO VARCHAR,
+CARGADORES LIST<VARCHAR>,
+PRIMARY KEY ((ACTIVO, ID), PAQUETE, TRANSPORTE)
+);
+
+CREATE TABLE FLETES_TRANSPORTE(
+ACTIVO BOOLEAN,
+ID VARCHAR,
+TRANSPORTE VARCHAR,
+DESTINO FROZEN<DIRECCION>,
+PAQUETE VARCHAR,
+CLIENTE VARCHAR,
+TELEFONO VARCHAR,
+CARGADORES LIST<VARCHAR>,
+PRIMARY KEY ((ACTIVO, TRANSPORTE), ID, PAQUETE)
+);
+
+CREATE TABLE FLETES_CLIENTE(
+ACTIVO BOOLEAN,
+ID VARCHAR,
+TRANSPORTE VARCHAR,
+DESTINO FROZEN<DIRECCION>,
+PAQUETE VARCHAR,
+CLIENTE VARCHAR,
+TELEFONO VARCHAR,
+CARGADORES LIST<VARCHAR>,
+PRIMARY KEY ((ACTIVO,CLIENTE), ID, PAQUETE, TRANSPORTE)
+);
+/*************************************************/
+/*TABLAS DE INMUEBLES*/
+CREATE TABLE INMUEBLES(
+TITULO VARCHAR,
+ESTADO VARCHAR,
+FOTO VARCHAR,
+DIRECCION FROZEN<DIRECCION>,
+PRECIO_RENTA DECIMAL,
+PRECIO_VENTA DECIMAL,
+CUARTOS SMALLINT,
+PISOS SMALLINT,
+METROS_CUADRADOS DECIMAL,
+DESCRIPCION VARCHAR,
+SERVICIOS SET<VARCHAR>,
+NOTARIO FROZEN<NOTARIO>,
+PRIMARY KEY (TITULO, ESTADO)
+)WITH COMMENT='C2, C3, C5, I1, I2';
+
+CREATE TABLE INMUEBLES_INMOBILIARIA(
+INMOBILIARIA VARCHAR,
+TITULO VARCHAR,
+ESTADO VARCHAR,
+FOTO VARCHAR,
+DIRECCION FROZEN<DIRECCION>,
+PRECIO_RENTA DECIMAL,
+PRECIO_VENTA DECIMAL,
+METROS_CUADRADOS DECIMAL,
+PRIMARY KEY (INMOBILIARIA, ESTADO, TITULO)
+)WITH COMMENT='I1';
+
+CREATE TABLE INMUEBLES_CLIENTE(
+CLIENTE VARCHAR,
+TITULO VARCHAR,
+ESTADO VARCHAR,
+FOTO VARCHAR,
+DIRECCION FROZEN<DIRECCION>,
+PRECIO_RENTA DECIMAL,
+PRECIO_VENTA DECIMAL,
+METROS_CUADRADOS DECIMAL,
+ACREDITADO BOOLEAN,
+PRIMARY KEY (CLIENTE, ESTADO, TITULO)
+)WITH COMMENT='C9';]]></string>
+		</script>
 	</layout>
 </project>
