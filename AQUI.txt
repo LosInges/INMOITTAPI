@@ -10,3 +10,4 @@ git commit -m "Escribe un texto referente al commit"
 git push -u origin TUNOMBRE
 IR A GITHUB Y HACER EL PULL REQUEST
 ASi mero
+mejor no
