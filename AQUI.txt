@@ -2,3 +2,10 @@ Prueba de copia de una rama:
 OK JEFITO, le pongo más líneas punto y aparte.
 jfvhgbrjgtkfk
 Un texto extra
+///////////////////
+git checkout -b TUNOMBRE
+TRABAJAR EN MI PARTE DEL TRABAJO Y HACER COMMIT
+git add .
+git commit -m "Escribe un texto referente al commit"
+git push -u origin TUNOMBRE
+IR A GITHUB Y HACER EL PULL REQUEST
