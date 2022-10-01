@@ -19,8 +19,8 @@ const getItems = (req, res) => {
 
 const getPaquetes = (req, res) => {
   conectar.execute(
-    'SELECT paquete FROM fletes WHERE activo=? AND id=?',
-    [true, req.params.flete],
+    'SELECT paquete, cargadores FROM transporte_flete WHERE flete=?',
+    [req.params.flete],
     { prepare: true },
     (err, results) => {
       if (err) {
@@ -71,7 +71,7 @@ const getCargadoresFlete = (req, res) => {
 const getCargador = (req, res) => {
   conectar.execute(
     `SELECT * FROM cargadores WHERE empresa=? AND rfc=?`,
-    [req.params.empresa, req.params.cargador],
+    [req.params.empresa, req.params.rfc],
     { prepare: true },
     (err, results) => {
       if (err) {
@@ -104,7 +104,7 @@ const getTransportes = (req, res) => {
 
 const getTransporte = (req, res) => {
   conectar.execute(
-    'SELECT * FROM transporte WHERE empresa=? AND matricula=?',
+    'SELECT * FROM transportes WHERE empresa=? AND matricula=?',
     [req.params.empresa, req.params.matricula],
     { prepare: true },
     (err, results) => {
@@ -187,6 +187,38 @@ const getPrecargas = (req, res) => {
   );
 };
 
+const getEmpresas = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM empresas_fletes',
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res
+        .header('Access-Control-Allow-Origin', '*')
+        .json({ results: results.rows });
+    }
+  );
+};
+
+const getEmpresa = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM empresas_fletes WHERE correo=?',
+    [req.params.correo],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res
+        .header('Access-Control-Allow-Origin', '*')
+        .json({ results: results.rows });
+    }
+  );
+};
+
 module.exports = {
   getItems,
   getPaquetes,
@@ -199,4 +231,6 @@ module.exports = {
   getFletesEmpresa,
   getFletesCliente,
   getPrecargas,
+  getEmpresas,
+  getEmpresa,
 };

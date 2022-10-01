@@ -51,7 +51,7 @@ const deleteCargador = (req, res) => {
 
 const deleteTransporte = (req, res) => {
   const query =
-    'INSERT INTO transporte(empresa, matricula, capacidad, activo) VALUES(?,?,?,?)';
+    'INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES(?,?,?,?)';
   const params = [
     req.body.empresa,
     req.body.matricula,
@@ -109,6 +109,20 @@ const deleteFlete = (req, res) => {
   });
 };
 
+const deleteEmpresa = (req, res) => {
+  const query = 'DELETE FROM empresas_fletes WHERE correo=?';
+  const params = [req.body.correo];
+  conectar.execute(query, params, { prepare: true }, (err, results) => {
+    if (err) {
+      res
+        .header('Access-Control-Allow-Origin', '*')
+        .json({ results: false, err });
+      return;
+    }
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+  });
+};
+
 module.exports = {
   deleteItem,
   deletePaquete,
@@ -116,4 +130,5 @@ module.exports = {
   deleteTransporte,
   deletePrecarga,
   deleteFlete,
+  deleteEmpresa,
 };
