@@ -1,24 +1,32 @@
 const express = require('express');
-const getControllers = require('./controllers/get');
-const postControllers = require('./controllers/post');
-const deleteControllers = require('./controllers/delete');
+const getFletes = require('./controllers/getFletes');
+const postFletes = require('./controllers/postFletes');
+const deleteFletes = require('./controllers/deleteFletes');
 const router = express.Router();
 
-//GET
-router.get('/items/:paquete', getControllers.getItems);
-router.get('/cargadores', getControllers.getCargadores);
-router.get('/transportes', getControllers.getTransportes);
-//POST
-router.post('/item', postControllers.postItem);
-router.post('/paquete', postControllers.postPaquete);
-router.post('/cargador', postControllers.postCargador);
-router.post('/transporte', postControllers.postTransporte);
-//DELETE
-router.delete('/item', deleteControllers.deleteItem);
-router.delete('/paquete', deleteControllers.deletePaquete);
-router.delete('/cargador', deleteControllers.deleteCargador);
-router.delete('/transporte', deleteControllers.deleteTransporte);
-router.delete('/itemPaquete', deleteControllers.deleteItemPaquete);
-//PUT
+//GET FLETES
+router.get('/items/:paquete', getFletes.getItems);
+router.get('/paquetes/:flete', getFletes.getPaquetes);
+router.get('/cargadores/:empresa', getFletes.getCargadores);
+router.get('/cargador/:empresa/:rfc', getFletes.getCargador);
+router.get('/cargadores/:flete', getFletes.getCargadoresFlete);
+router.get('/transportes/:empresa', getFletes.getTransportes);
+router.get('/transporte/:empresa/:matricula', getFletes.getTransporte);
+router.get('/flete/:flete', getFletes.getFlete);
+router.get('/fletesE/:empresa', getFletes.getFletesEmpresa);
+router.get('/fletesC/:cliente', getFletes.getFletesCliente);
+router.get('/precargas/:empresa', getFletes.getPrecargas);
+//POST FLETES
+router.post('/item', postFletes.postItem);
+router.post('/paquete', postFletes.postPaquete);
+router.post('/cargador', postFletes.postCargador);
+router.post('/transporte', postFletes.postTransporte);
+//DELETE FLETES
+router.delete('/item', deleteFletes.deleteItem);
+router.delete('/paquete', deleteFletes.deletePaquete);
+router.delete('/cargador', deleteFletes.deleteCargador);
+router.delete('/transporte', deleteFletes.deleteTransporte);
+router.delete('/itemPaquete', deleteFletes.deleteItemPaquete);
+//PUT FLETES
 
 module.exports = router;
