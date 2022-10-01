@@ -18,15 +18,19 @@ router.get('/fletesC/:cliente', getFletes.getFletesCliente);
 router.get('/precargas/:empresa', getFletes.getPrecargas);
 //POST FLETES
 router.post('/item', postFletes.postItem);
-router.post('/paquete', postFletes.postPaquete);
 router.post('/cargador', postFletes.postCargador);
 router.post('/transporte', postFletes.postTransporte);
+router.post('/empresa', postFletes.postEmpresa);
+router.post('/precarga', postFletes.postPrecarga);
+router.post('/transporteFlete', postFletes.postTransporteFlete);
+router.post('/flete', postFletes.postFlete);
 //DELETE FLETES
 router.delete('/item', deleteFletes.deleteItem);
 router.delete('/paquete', deleteFletes.deletePaquete);
 router.delete('/cargador', deleteFletes.deleteCargador);
 router.delete('/transporte', deleteFletes.deleteTransporte);
-router.delete('/itemPaquete', deleteFletes.deleteItemPaquete);
+router.delete('/precarga', deleteFletes.deletePrecarga);
+router.delete('/flete', deleteFletes.deleteFlete);
 //PUT FLETES
 
 module.exports = router;

@@ -48,8 +48,8 @@ const postCargador = (req, res) => {
 
 const postTransporte = (req, res) => {
   const query =
-    'INSERT INTO transportes(empresa, matricula, capacidad) VALUES (?,?,?)';
-  const params = [req.body.empresa, req.body.matricula, req.body.capacidad];
+    'INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES (?,?,?,?)';
+  const params = [req.body.empresa, req.body.matricula, req.body.capacidad, true];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
@@ -83,7 +83,7 @@ const postEmpresa = (req, res) => {
 
 const postPrecarga = (req, res) => {
   const query =
-    'INSERT INTO precarga(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente) VALUES (?,?,?,?,?,?,?)';
+    'INSERT INTO precarga(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
   const params = [
     req.body.id,
     req.body.cajas_chicas,
@@ -92,6 +92,11 @@ const postPrecarga = (req, res) => {
     req.body.muebles,
     req.body.empresa,
     req.body.cliente,
+    req.body.destino,
+    req.body.fecha,
+    req.body.hora,
+    req.body.origen,
+    req.body.telefono,
   ];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
@@ -189,4 +194,6 @@ module.exports = {
   postTransporte,
   postEmpresa,
   postPrecarga,
+  postTransporteFlete,
+  postFlete,
 };

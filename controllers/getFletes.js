@@ -192,11 +192,11 @@ module.exports = {
   getPaquetes,
   getCargadores,
   getCargador,
+  getCargadoresFlete,
   getTransportes,
   getTransporte,
-  getCargadoresFlete,
+  getFlete,
   getFletesEmpresa,
   getFletesCliente,
-  getFlete,
   getPrecargas,
 };
