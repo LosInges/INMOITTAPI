@@ -63,12 +63,13 @@ const postTransporte = (req, res) => {
 
 const postEmpresa = (req, res) => {
   const query =
-    'INSERT INTO empresas_fletes(correo, nombre, password, telefono) VALUES (?,?,?,?)';
+    'INSERT INTO empresas_fletes(correo, nombre, password, telefono, estados) VALUES (?,?,?,?,?)';
   const params = [
     req.body.correo,
     req.body.nombre,
     req.body.password,
     req.body.telefono,
+    req.body.estados,
   ];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
