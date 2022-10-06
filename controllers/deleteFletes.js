@@ -2,7 +2,7 @@ const conectar = require('./conexion');
 
 const deleteItem = (req, res) => {
   const query = 'DELETE FROM paquetes WHERE id=? AND id_item=?';
-  const params = [req.body.id, req.body.id_item];
+  const params = [req.body.id, req.body.idItem];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
@@ -18,7 +18,7 @@ const deletePaquete = (req, res) => {
   const queries = [
     {
       query: 'DELETE FROM paquetes WHERE id=?',
-      params: [req.body.id],
+      params: [req.body.paquete],
     },
     {
       query:

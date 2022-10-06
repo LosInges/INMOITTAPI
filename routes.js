@@ -2,8 +2,12 @@ const express = require('express');
 const getFletes = require('./controllers/getFletes');
 const postFletes = require('./controllers/postFletes');
 const deleteFletes = require('./controllers/deleteFletes');
+const login = require('./controllers/login');
 const router = express.Router();
 
+//LOGIN
+router.post('/login', login.login);
+router.get('/logout', login.logout);
 //GET FLETES
 router.get('/items/:paquete', getFletes.getItems);
 router.get('/paquetes/:flete', getFletes.getPaquetes);

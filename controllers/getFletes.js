@@ -19,7 +19,7 @@ const getItems = (req, res) => {
 
 const getPaquetes = (req, res) => {
   conectar.execute(
-    'SELECT paquete, cargadores FROM transporte_flete WHERE flete=?',
+    'SELECT * FROM transporte_flete WHERE flete=?',
     [req.params.flete],
     { prepare: true },
     (err, results) => {
