@@ -24,18 +24,26 @@ const postItem = (req, res) => {
 };
 
 const postCargador = (req, res) => {
-  const query =
-    'INSERT INTO cargadores(empresa, rfc, nombre, apellido, password, telefono, foto) VALUES (?,?,?,?,?,?,?)';
-  const params = [
-    req.body.empresa,
-    req.body.rfc,
-    req.body.nombre,
-    req.body.apellido,
-    req.body.password,
-    req.body.telefono,
-    req.body.foto,
+  const queries = [
+    {
+      query:
+        'INSERT INTO cargadores(empresa, rfc, nombre, apellido, password, telefono, foto) VALUES (?,?,?,?,?,?,?)',
+      params: [
+        req.body.empresa,
+        req.body.rfc,
+        req.body.nombre,
+        req.body.apellido,
+        req.body.password,
+        req.body.telefono,
+        req.body.foto,
+      ],
+    },
+    {
+      query: 'INSERT INTO cuentas(correo, password, tipo) VALUES (?,?,?)',
+      params: [req.body.rfc, req.body.password, 'cargador'],
+    },
   ];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')
@@ -49,7 +57,12 @@ const postCargador = (req, res) => {
 const postTransporte = (req, res) => {
   const query =
     'INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES (?,?,?,?)';
-  const params = [req.body.empresa, req.body.matricula, req.body.capacidad, true];
+  const params = [
+    req.body.empresa,
+    req.body.matricula,
+    req.body.capacidad,
+    true,
+  ];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
@@ -62,16 +75,24 @@ const postTransporte = (req, res) => {
 };
 
 const postEmpresa = (req, res) => {
-  const query =
-    'INSERT INTO empresas_fletes(correo, nombre, password, telefono, estados) VALUES (?,?,?,?,?)';
-  const params = [
-    req.body.correo,
-    req.body.nombre,
-    req.body.password,
-    req.body.telefono,
-    req.body.estados,
+  const queries = [
+    {
+      query:
+        'INSERT INTO empresas_fletes(correo, nombre, password, telefono, estados) VALUES (?,?,?,?,?)',
+      params: [
+        req.body.correo,
+        req.body.nombre,
+        req.body.password,
+        req.body.telefono,
+        req.body.estados,
+      ],
+    },
+    {
+      query: 'INSERT INTO cuentas(correo, password, tipo) VALUES (?,?,?)',
+      params: [req.body.correo, req.body.password, 'empresa'],
+    },
   ];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')

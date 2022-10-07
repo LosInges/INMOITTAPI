@@ -122,6 +122,7 @@
 			<column name="nombre" type="TEXT" jt="12" />
 			<column name="password" type="TEXT" jt="12" />
 			<column name="telefono" type="TEXT" jt="12" />
+			<column name="estados" type="list&lt;text&gt;" jt="4999545" />
 			<index name="pk_empresas_fletes" unique="PRIMARY_KEY" >
 				<column name="correo" />
 			</index>
@@ -133,10 +134,10 @@
 			<column name="empresa" type="TEXT" jt="12" />
 			<column name="cliente" type="TEXT" jt="12" />
 			<column name="destino" type="frozen&lt;direccion&gt;" jt="4999545" />
-			<column name="telefono" type="TEXT" jt="12" />
-			<column name="origen" type="frozen&lt;direccion&gt;" jt="4999545" />
 			<column name="fecha" type="DATE" jt="91" />
 			<column name="hora" type="TIME" jt="92" />
+			<column name="origen" type="frozen&lt;direccion&gt;" jt="4999545" />
+			<column name="telefono" type="TEXT" jt="12" />
 			<index name="pk_fletes" unique="PRIMARY_KEY" >
 				<column name="activo" />
 				<column name="id" />
@@ -545,18 +546,18 @@
 		<entity schema="inmoitt" name="cargadores" color="BEF4C4" x="720" y="48" />
 		<entity schema="inmoitt" name="cliente_inmobiliaria" color="BED3F4" x="432" y="64" />
 		<entity schema="inmoitt" name="clientes" color="F4BEF2" x="272" y="320" />
-		<entity schema="inmoitt" name="empresas_fletes" color="BEF4C4" x="736" y="224" />
-		<entity schema="inmoitt" name="fletes" color="BEF4C4" x="960" y="48" />
-		<entity schema="inmoitt" name="fletes_cliente" color="BEF4C4" x="880" y="256" />
-		<entity schema="inmoitt" name="fletes_empresa" color="BEF4C4" x="1008" y="256" />
+		<entity schema="inmoitt" name="empresas_fletes" color="BEF4C4" x="720" y="224" />
+		<entity schema="inmoitt" name="fletes" color="BEF4C4" x="992" y="272" />
+		<entity schema="inmoitt" name="fletes_cliente" color="BEF4C4" x="992" y="48" />
+		<entity schema="inmoitt" name="fletes_empresa" color="BEF4C4" x="864" y="48" />
 		<entity schema="inmoitt" name="inmobiliarias" color="BED3F4" x="448" y="224" />
 		<entity schema="inmoitt" name="inmuebles" color="BEF4F0" x="256" y="64" />
 		<entity schema="inmoitt" name="inmuebles_cliente" color="BEF4F0" x="64" y="64" />
 		<entity schema="inmoitt" name="inmuebles_inmobiliaria" color="BEF4F0" x="48" y="272" />
 		<entity schema="inmoitt" name="paquetes" color="BEF4C4" x="592" y="48" />
-		<entity schema="inmoitt" name="precarga" color="BEF4C4" x="576" y="240" />
-		<entity schema="inmoitt" name="transporte_flete" color="BEF4C4" x="832" y="48" />
-		<entity schema="inmoitt" name="transportes" color="BEF4C4" x="736" y="352" />
+		<entity schema="inmoitt" name="precarga" color="BEF4C4" x="576" y="224" />
+		<entity schema="inmoitt" name="transporte_flete" color="BEF4C4" x="864" y="272" />
+		<entity schema="inmoitt" name="transportes" color="BEF4C4" x="736" y="368" />
 		<script name="script-inmoitt.sql" id="Editor-1f0" language="SQL" >
 			<string><![CDATA[DROP KEYSPACE INMOITT;
 CREATE KEYSPACE INMOITT WITH REPLICATION={'class':'SimpleStrategy', 'replication_factor':1};
@@ -575,7 +576,8 @@ calle VARCHAR,
 codigoPostal VARCHAR,
 colonia VARCHAR,
 numeroExterior INT,
-numeroInterior INT
+numeroInterior INT,
+estado VARCHAR
 );
 /**************************************************/
 /*TABLAS DE FLETES*/
@@ -618,9 +620,13 @@ CORREO VARCHAR,
 NOMBRE VARCHAR,
 PASSWORD VARCHAR,
 TELEFONO VARCHAR,
+ESTADOS LIST<VARCHAR>,
 PRIMARY KEY (CORREO)
 );
 
+DROP TABLE FLETES;
+DROP TABLE FLETES_CLIENTE;
+DROP TABLE FLETES_EMPRESA;
 CREATE TABLE FLETES(
 ACTIVO BOOLEAN,
 ID VARCHAR,
