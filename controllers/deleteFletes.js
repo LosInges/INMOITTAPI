@@ -38,9 +38,17 @@ const deletePaquete = (req, res) => {
 };
 
 const deleteCargador = (req, res) => {
-  const query = 'DELETE FROM cargadores WHERE empresa=? AND rfc=?';
-  const params = [req.body.empresa, req.body.rfc];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  const queries = [
+    {
+      query: 'DELETE FROM cargadores WHERE empresa=? AND rfc=?',
+      params: [req.body.empresa, req.body.rfc],
+    },
+    {
+      query: 'DELETE FROM cuentas WHERE correo=?',
+      params: [req.body.rfc],
+    },
+  ];
+  conectar.execute(queries, { prepare: true }, (err, results) => {
     if (err) {
       res.header('Access-Control-Allow-Origin', '*').json({ results: false });
       return;
@@ -90,11 +98,13 @@ const deleteFlete = (req, res) => {
       params: [false, true, req.body.id],
     },
     {
-      query: 'UPDATE fletes_cliente SET activo=? WHERE activo=? AND cliente=? AND empresa=? AND id=?',
+      query:
+        'UPDATE fletes_cliente SET activo=? WHERE activo=? AND cliente=? AND empresa=? AND id=?',
       params: [false, true, req.body.cliente, req.body.empresa, req.body.id],
     },
     {
-      query: 'UPDATE fletes_empresa SET activo=? WHERE activo=? AND empresa=? AND id=?',
+      query:
+        'UPDATE fletes_empresa SET activo=? WHERE activo=? AND empresa=? AND id=?',
       params: [false, true, req.body.empresa, req.body.id],
     },
   ];
@@ -110,9 +120,17 @@ const deleteFlete = (req, res) => {
 };
 
 const deleteEmpresa = (req, res) => {
-  const query = 'DELETE FROM empresas_fletes WHERE correo=?';
-  const params = [req.body.correo];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  const queries = [
+    {
+      query: 'DELETE FROM empresas_fletes WHERE correo=?',
+      params: [req.body.correo],
+    },
+    {
+      query: 'DELETE FROM cuentas WHERE correo=?',
+      params: [req.body.correo],
+    },
+  ];
+  conectar.execute(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')
