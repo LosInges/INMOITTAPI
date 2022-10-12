@@ -1,4 +1,4 @@
-const { conexion } = require('./conexion');
+const conexion = require('./conexion');
 
 const login = (req, res) => {
   if (!req.session.email) {
@@ -12,24 +12,27 @@ const login = (req, res) => {
             .header('Access-Control-Allow-Origin', '*')
             .json({ err, session: req.session });
           return;
-        }
-        if (results.rows.length > 0) {
-          if (results.rows[0].contrasena === req.body.password) {
+        } else if (results.rows.length > 0) {
+          if (results.rows[0].password === req.body.password) {
             req.session.email = req.body.email;
             req.session.tipo = results.rows[0].tipo;
+            if (req.session.tipo === 'cargador') {
+              req.session.empresa = results.rows[0].empresa;
+            }
             res
               .header('Access-Control-Allow-Origin', '*')
               .json({ session: req.session });
             return;
           }
+        } else {
+          res
+            .header('Access-Control-Allow-Origin', '*')
+            .json({ session: req.session });
+          return;
         }
-        res
-          .header('Access-Control-Allow-Origin', '*')
-          .json({ session: req.session });
       }
     );
   }
-  res.header('Access-Control-Allow-Origin', '*').json({ session: req.session });
 };
 
 const logout = (req, res) => {

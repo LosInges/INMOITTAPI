@@ -5,6 +5,10 @@ const deleteFletes = require('./controllers/deleteFletes');
 const login = require('./controllers/login');
 const router = express.Router();
 
+//SESSION
+router.get('/session', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*').json({ session: req.session });
+});
 //LOGIN
 router.post('/login', login.login);
 router.get('/logout', login.logout);
@@ -20,6 +24,7 @@ router.get('/flete/:flete', getFletes.getFlete);
 router.get('/fletesE/:empresa', getFletes.getFletesEmpresa);
 router.get('/fletesC/:cliente', getFletes.getFletesCliente);
 router.get('/precargas/:empresa', getFletes.getPrecargas);
+router.get('/precarga/:empresa/:id', getFletes.getPrecarga);
 router.get('/empresas', getFletes.getEmpresas);
 router.get('/empresa/:correo', getFletes.getEmpresa);
 //POST FLETES

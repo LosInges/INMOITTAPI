@@ -39,8 +39,9 @@ const postCargador = (req, res) => {
       ],
     },
     {
-      query: 'INSERT INTO cuentas(correo, password, tipo) VALUES (?,?,?)',
-      params: [req.body.rfc, req.body.password, 'cargador'],
+      query:
+        'INSERT INTO cuentas(correo, password, tipo, empresa) VALUES (?,?,?,?)',
+      params: [req.body.rfc, req.body.password, 'cargador', req.body.empresa],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
@@ -108,9 +109,9 @@ const postPrecarga = (req, res) => {
     'INSERT INTO precarga(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)';
   const params = [
     req.body.id,
-    req.body.cajas_chicas,
-    req.body.cajas_grandes,
-    req.body.cajas_medianas,
+    req.body.cajasChicas,
+    req.body.cajasGrandes,
+    req.body.cajasMedianas,
     req.body.muebles,
     req.body.empresa,
     req.body.cliente,

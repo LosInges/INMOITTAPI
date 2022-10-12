@@ -20,10 +20,12 @@ estado VARCHAR
 );
 /**************************************************/
 /*TABLA DE CUENTAS */
+DROP TABLE CUENTAS;
 CREATE TABLE CUENTAS(
 CORREO VARCHAR PRIMARY KEY,
 PASSWORD VARCHAR,
-TIPO VARCHAR
+TIPO VARCHAR,
+EMPRESA VARCHAR
 );
 /**************************************************/
 /*TABLAS DE FLETES*/

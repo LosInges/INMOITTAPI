@@ -10,9 +10,7 @@ const getItems = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -27,9 +25,7 @@ const getPaquetes = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -44,9 +40,7 @@ const getCargadores = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -61,9 +55,7 @@ const getCargadoresFlete = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -78,9 +70,7 @@ const getCargador = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
 };
@@ -95,9 +85,7 @@ const getTransportes = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -112,9 +100,7 @@ const getTransporte = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
 };
@@ -129,9 +115,7 @@ const getFletesEmpresa = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -146,9 +130,7 @@ const getFletesCliente = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
@@ -163,9 +145,7 @@ const getFlete = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
 };
@@ -180,26 +160,34 @@ const getPrecargas = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
     }
   );
 };
 
-const getEmpresas = (req, res) => {
+const getPrecarga = (req, res) => {
   conectar.execute(
-    'SELECT * FROM empresas_fletes',
+    'SELECT * FROM precarga WHERE empresa=? AND id=?',
+    [req.params.empresa, req.params.id],
+    { prepare: true },
     (err, results) => {
       if (err) {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
+};
+
+const getEmpresas = (req, res) => {
+  conectar.execute('SELECT * FROM empresas_fletes', (err, results) => {
+    if (err) {
+      res.header('Access-Control-Allow-Origin', '*').json({ err });
+      return;
+    }
+    res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+  });
 };
 
 const getEmpresa = (req, res) => {
@@ -212,9 +200,7 @@ const getEmpresa = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res
-        .header('Access-Control-Allow-Origin', '*')
-        .json({ results: results.rows });
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
 };
@@ -231,6 +217,7 @@ module.exports = {
   getFletesEmpresa,
   getFletesCliente,
   getPrecargas,
+  getPrecarga,
   getEmpresas,
   getEmpresa,
 };
