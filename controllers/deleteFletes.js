@@ -1,65 +1,66 @@
-const conectar = require('./conexion');
+const conectar = require("./conexion");
 
 const deleteItem = (req, res) => {
-  const query = 'DELETE FROM paquetes WHERE id=? AND id_item=?';
+  const query = "DELETE FROM paquetes WHERE id=? AND id_item=?";
   const params = [req.body.id, req.body.idItem];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deletePaquete = (req, res) => {
   const queries = [
     {
-      query: 'DELETE FROM paquetes WHERE id=?',
+      query: "DELETE FROM paquetes WHERE id=?",
       params: [req.body.paquete],
     },
     {
       query:
-        'DELETE FROM transporte_flete WHERE flete=? AND transporte=? AND paquete=?',
+        "DELETE FROM transporte_flete WHERE flete=? AND transporte=? AND paquete=?",
       params: [req.body.flete, req.body.transporte, req.body.paquete],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deleteCargador = (req, res) => {
   const queries = [
     {
-      query: 'DELETE FROM cargadores WHERE empresa=? AND rfc=?',
+      query: "DELETE FROM cargadores WHERE empresa=? AND rfc=?",
       params: [req.body.empresa, req.body.rfc],
     },
     {
-      query: 'DELETE FROM cuentas WHERE correo=?',
+      query: "DELETE FROM cuentas WHERE correo=?",
       params: [req.body.rfc],
     },
   ];
-  conectar.execute(queries, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
-      res.header('Access-Control-Allow-Origin', '*').json({ results: false });
+      res.header("Access-Control-Allow-Origin", "*").json({ err });
+      console.log(err);
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deleteTransporte = (req, res) => {
   const query =
-    'INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES(?,?,?,?)';
+    "INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES(?,?,?,?)";
   const params = [
     req.body.empresa,
     req.body.matricula,
@@ -69,75 +70,119 @@ const deleteTransporte = (req, res) => {
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deletePrecarga = (req, res) => {
-  const query = 'DELETE FROM precarga WHERE empresa=? AND id=?';
+  const query = "DELETE FROM precarga WHERE empresa=? AND id=?";
   const params = [req.body.empresa, req.body.id];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deleteFlete = (req, res) => {
   const queries = [
     {
-      query: 'UPDATE fletes SET activo=? WHERE activo=? AND id=?',
-      params: [false, true, req.body.id],
+      query: "DELETE FROM fletes WHERE activo=? AND id=?",
+      params: [true, req.body.id],
     },
     {
       query:
-        'UPDATE fletes_cliente SET activo=? WHERE activo=? AND cliente=? AND empresa=? AND id=?',
-      params: [false, true, req.body.cliente, req.body.empresa, req.body.id],
+        "INSERT INTO fletes(activo, id, empresa, cliente, destino, telefono, origen, fecha, hora) VALUES (?,?,?,?,?,?,?,?,?)",
+      params: [
+        false,
+        req.body.id,
+        req.body.empresa,
+        req.body.cliente,
+        req.body.destino,
+        req.body.telefono,
+        req.body.origen,
+        req.body.fecha,
+        req.body.hora,
+      ],
     },
     {
       query:
-        'UPDATE fletes_empresa SET activo=? WHERE activo=? AND empresa=? AND id=?',
-      params: [false, true, req.body.empresa, req.body.id],
+        "DELETE FROM fletes_cliente WHERE activo=? AND cliente=? AND empresa=? AND id=?",
+      params: [true, req.body.cliente, req.body.empresa, req.body.id],
+    },
+    {
+      query:
+        "INSERT INTO fletes_cliente(activo, cliente, empresa, id, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)",
+      params: [
+        false,
+        req.body.cliente,
+        req.body.empresa,
+        req.body.id,
+        req.body.destino,
+        req.body.fecha,
+        req.body.hora,
+        req.body.origen,
+        req.body.telefono,
+      ],
+    },
+    {
+      query: "DELETE FROM fletes_empresa WHERE activo=? AND empresa=? AND id=?",
+      params: [true, req.body.empresa, req.body.id],
+    },
+    {
+      query:
+        "INSERT INTO fletes_empresa(activo, empresa, id, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)",
+      params: [
+        false,
+        req.body.empresa,
+        req.body.id,
+        req.body.cliente,
+        req.body.destino,
+        req.body.fecha,
+        req.body.hora,
+        req.body.origen,
+        req.body.telefono,
+      ],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
 const deleteEmpresa = (req, res) => {
   const queries = [
     {
-      query: 'DELETE FROM empresas_fletes WHERE correo=?',
+      query: "DELETE FROM empresas_fletes WHERE correo=?",
       params: [req.body.correo],
     },
     {
-      query: 'DELETE FROM cuentas WHERE correo=?',
+      query: "DELETE FROM cuentas WHERE correo=?",
       params: [req.body.correo],
     },
   ];
   conectar.execute(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header('Access-Control-Allow-Origin', '*')
+        .header("Access-Control-Allow-Origin", "*")
         .json({ results: false, err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
   });
 };
 
