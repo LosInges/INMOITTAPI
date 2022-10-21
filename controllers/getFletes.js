@@ -1,31 +1,47 @@
-const conectar = require('./conexion');
+const conectar = require("./conexion");
 
 const getItems = (req, res) => {
   conectar.execute(
-    'SELECT * FROM paquetes WHERE id=?',
+    "SELECT * FROM paquetes WHERE id=?",
     [req.params.paquete],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
+    }
+  );
+};
+
+const getTransportesFlete = (req, res) => {
+  conectar.execute(
+    "SELECT transporte, cargadores FROM transporte_flete WHERE flete=?",
+    [req.params.flete],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
+        return;
+      }
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
+      f;
     }
   );
 };
 
 const getPaquetes = (req, res) => {
   conectar.execute(
-    'SELECT * FROM transporte_flete WHERE flete=?',
+    "SELECT * FROM transporte_flete WHERE flete=?",
     [req.params.flete],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
@@ -37,25 +53,25 @@ const getCargadores = (req, res) => {
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
 
 const getCargadoresFlete = (req, res) => {
   conectar.execute(
-    'SELECT transporte, cargadores FROM transporte_flete WHERE flete=?',
+    "SELECT transporte, cargadores FROM transporte_flete WHERE flete=?",
     [req.params.flete],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
@@ -67,10 +83,10 @@ const getCargador = (req, res) => {
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
@@ -82,125 +98,125 @@ const getTransportes = (req, res) => {
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
 
 const getTransporte = (req, res) => {
   conectar.execute(
-    'SELECT * FROM transportes WHERE empresa=? AND matricula=?',
+    "SELECT * FROM transportes WHERE empresa=? AND matricula=?",
     [req.params.empresa, req.params.matricula],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
 
 const getFletesEmpresa = (req, res) => {
   conectar.execute(
-    'SELECT * FROM fletes_empresa WHERE activo=? AND empresa=?',
+    "SELECT * FROM fletes_empresa WHERE activo=? AND empresa=?",
     [true, req.params.empresa],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
 
 const getFletesCliente = (req, res) => {
   conectar.execute(
-    'SELECT * FROM fletes_cliente WHERE activo=? AND cliente=?',
+    "SELECT * FROM fletes_cliente WHERE activo=? AND cliente=?",
     [true, req.params.cliente],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
 
 const getFlete = (req, res) => {
   conectar.execute(
-    'SELECT * FROM fletes WHERE activo=? AND id=?',
+    "SELECT * FROM fletes WHERE activo=? AND id=?",
     [true, req.params.flete],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
 
 const getPrecargas = (req, res) => {
   conectar.execute(
-    'SELECT * FROM precarga WHERE empresa=?',
+    "SELECT * FROM precarga WHERE empresa=?",
     [req.params.empresa],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
     }
   );
 };
 
 const getPrecarga = (req, res) => {
   conectar.execute(
-    'SELECT * FROM precarga WHERE empresa=? AND id=?',
+    "SELECT * FROM precarga WHERE empresa=? AND id=?",
     [req.params.empresa, req.params.id],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
 
 const getEmpresas = (req, res) => {
-  conectar.execute('SELECT * FROM empresas_fletes', (err, results) => {
+  conectar.execute("SELECT * FROM empresas_fletes", (err, results) => {
     if (err) {
-      res.header('Access-Control-Allow-Origin', '*').json({ err });
+      res.header("Access-Control-Allow-Origin", "*").json({ err });
       return;
     }
-    res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    res.header("Access-Control-Allow-Origin", "*").send(results.rows);
   });
 };
 
 const getEmpresa = (req, res) => {
   conectar.execute(
-    'SELECT * FROM empresas_fletes WHERE correo=?',
+    "SELECT * FROM empresas_fletes WHERE correo=?",
     [req.params.correo],
     { prepare: true },
     (err, results) => {
       if (err) {
-        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
@@ -208,6 +224,7 @@ const getEmpresa = (req, res) => {
 module.exports = {
   getItems,
   getPaquetes,
+  getTransportesFlete,
   getCargadores,
   getCargador,
   getCargadoresFlete,
