@@ -17,7 +17,7 @@ const getItems = (req, res) => {
 
 const getTransportesFlete = (req, res) => {
   conectar.execute(
-    "SELECT transporte, cargadores FROM transporte_flete WHERE flete=?",
+    "SELECT * FROM transporte_flete WHERE flete=?",
     [req.params.flete],
     { prepare: true },
     (err, results) => {
@@ -25,8 +25,7 @@ const getTransportesFlete = (req, res) => {
         res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
-      f;
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };
