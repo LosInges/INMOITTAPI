@@ -2,7 +2,21 @@ const conectar = require("./conexion");
 
 const deleteItem = (req, res) => {
   const query = "DELETE FROM paquetes WHERE id=? AND id_item=?";
-  const params = [req.body.id, req.body.idItem];
+  const params = [req.body.id, req.body.id_item];
+  conectar.execute(query, params, { prepare: true }, (err, results) => {
+    if (err) {
+      res
+        .header("Access-Control-Allow-Origin", "*")
+        .json({ results: false, err });
+      return;
+    }
+    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+  });
+};
+
+const deleteUltimoItem = (req, res) => {
+  const query = "DELETE FROM paquetes WHERE id=?";
+  const params = [req.body.id];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
@@ -15,18 +29,10 @@ const deleteItem = (req, res) => {
 };
 
 const deletePaquete = (req, res) => {
-  const queries = [
-    {
-      query: "DELETE FROM paquetes WHERE id=?",
-      params: [req.body.paquete],
-    },
-    {
-      query:
-        "DELETE FROM transporte_flete WHERE flete=? AND transporte=? AND paquete=?",
-      params: [req.body.flete, req.body.transporte, req.body.paquete],
-    },
-  ];
-  conectar.batch(queries, { prepare: true }, (err, results) => {
+      const query = "DELETE FROM paquetes WHERE id=?";
+      const params = [req.body.id];
+ 
+  conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
         .header("Access-Control-Allow-Origin", "*")
@@ -188,6 +194,7 @@ const deleteEmpresa = (req, res) => {
 
 module.exports = {
   deleteItem,
+  deleteUltimoItem,
   deletePaquete,
   deleteCargador,
   deleteTransporte,
