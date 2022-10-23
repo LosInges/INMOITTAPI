@@ -38,6 +38,7 @@ router.post("/transporteFlete", postFletes.postTransporteFlete);
 router.post("/flete", postFletes.postFlete);
 //DELETE FLETES
 router.delete("/item", deleteFletes.deleteItem);
+router.delete("/ultimoItem", deleteFletes.deleteUltimoItem);
 router.delete("/paquete", deleteFletes.deletePaquete);
 router.delete("/cargador", deleteFletes.deleteCargador);
 router.delete("/transporte", deleteFletes.deleteTransporte);

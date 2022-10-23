@@ -40,7 +40,7 @@ const getPaquetes = (req, res) => {
         res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
     }
   );
 };

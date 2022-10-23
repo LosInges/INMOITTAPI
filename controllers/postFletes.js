@@ -5,12 +5,12 @@ const postItem = (req, res) => {
     "INSERT INTO paquetes(id, id_item, foto, item, total, alto_item, ancho_item) VALUES (?,?,?,?,?,?,?)";
   const params = [
     req.body.id,
-    req.body.idItem,
+    req.body.id_item,
     req.body.foto,
     req.body.item,
     req.body.total,
-    req.body.altoItem,
-    req.body.anchoItem,
+    req.body.alto_item,
+    req.body.ancho_item,
   ];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
@@ -133,6 +133,7 @@ const postPrecarga = (req, res) => {
 };
 
 const postTransporteFlete = (req, res) => {
+  console.log(req.body.flete)
   const query =
     "INSERT INTO transporte_flete(flete, transporte, paquete, cargadores) VALUES (?,?,?,?)";
   const params = [
