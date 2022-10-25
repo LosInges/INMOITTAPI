@@ -3,7 +3,10 @@ const getFletes = require("./controllers/getFletes");
 const postFletes = require("./controllers/postFletes");
 const deleteFletes = require("./controllers/deleteFletes");
 const login = require("./controllers/login");
+const routerCliente = require("./clientesRoutes");
 const router = express.Router();
+router.use(routerCliente)
+
 
 //SESSION
 router.get("/session", (req, res) => {
