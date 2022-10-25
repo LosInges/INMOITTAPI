@@ -1,11 +1,14 @@
+const postCliente = require("./controllers/postCliente");
 const express = require("express");
 const router = express.Router();
-module.exports = router;
+
 
 //GET:
 
-
-
 //POST
+router.post("/cliente", postCliente.postCliente)
 
 //DELETE
+
+
+module.exports = router;
