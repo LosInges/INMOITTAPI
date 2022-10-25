@@ -4,9 +4,10 @@ const postFletes = require("./controllers/postFletes");
 const deleteFletes = require("./controllers/deleteFletes");
 const login = require("./controllers/login");
 const routerCliente = require("./clientesRoutes");
+const routerInmobiliaria = require("./inmobiliariasRoutes");
 const router = express.Router();
 router.use(routerCliente)
-
+router.use(routerInmobiliaria)
 
 //SESSION
 router.get("/session", (req, res) => {
