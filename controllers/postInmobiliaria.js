@@ -9,7 +9,7 @@ const postInmobiliaria = (req, res) => {
         },
         {
             query: "INSERT INTO cuentas (correo, password, tipo) values (?,?,?)",
-            params: [req.body.correo, req.body.password, "inmobilaria"]
+            params: [req.body.correo, req.body.password, "inmobiliaria"]
         }
     ]
     conectar.batch(queries, { prepare: true }, (err, results) => {
