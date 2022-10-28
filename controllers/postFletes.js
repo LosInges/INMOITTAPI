@@ -204,6 +204,10 @@ const postFlete = (req, res) => {
       query: "DELETE FROM precarga WHERE empresa=? AND id=?",
       params: [req.body.empresa, req.body.id],
     },
+    {
+      query: "DELETE FROM precarga_cliente WHERE cliente=? AND id=?",
+      params: [req.body.cliente, req.body.id],
+    }
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {

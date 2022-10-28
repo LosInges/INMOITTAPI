@@ -14,5 +14,22 @@ const getCliente = (req, res) => {
     }
   );
 };
+const getPrecargasCliente = (req, res) => {
+  conectar.execute(
+    "SELECT * FROM precarga_Cliente where cliente=?",
+    [req.params.correo],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header("Access-Control-Allow-Origin", "*").json({ err });
+        return;
+      }
+      res.header("Access-Control-Allow-Origin", "*").send(results.rows);
+    }
+  );
 
-module.exports={getCliente};
+};
+module.exports={
+  getCliente,
+  getPrecargasCliente
+};
