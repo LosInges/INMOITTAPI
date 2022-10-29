@@ -15,6 +15,8 @@ const getInmobiliaria = (req, res) => {
     );
 }
 
+
+
 module.exports={
     getInmobiliaria
 }
