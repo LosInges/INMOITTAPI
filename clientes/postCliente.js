@@ -1,5 +1,4 @@
-const { query } = require("express");
-const conectar = require("./conexion");
+const conectar = require("../controllers/conexion");
 
 const postCliente = (req, res) => {
   const queries = [
@@ -23,7 +22,7 @@ const postCliente = (req, res) => {
         ]
     }
   ];
-  conectar.batch(queries, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err) => {
     if (err) {
       res
         .header("Access-Control-Allow-Origin", "*")
@@ -77,7 +76,7 @@ const postPrecargaCliente =(req, res)=>{
   ]
   //precargaCliente, precarga, 
 
-  conectar.batch(queries, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err) => {
     if (err) {
       res
         .header("Access-Control-Allow-Origin", "*")

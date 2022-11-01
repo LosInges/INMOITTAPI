@@ -1,4 +1,4 @@
-const conectar = require("./conexion");
+const conectar = require("../controllers/conexion");
 
 const deleteItem = (req, res) => {
   const query = "DELETE FROM paquetes WHERE id=? AND id_item=?";

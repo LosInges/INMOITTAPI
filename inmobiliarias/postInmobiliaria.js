@@ -1,5 +1,4 @@
-const { reset } = require('nodemon');
-const conectar = require('./conexion');
+const conectar = require('../controllers/conexion');
 
 const postInmobiliaria = (req, res) => {
   const queries = [

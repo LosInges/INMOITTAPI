@@ -1,4 +1,4 @@
-const conectar = require("./conexion");
+const conectar = require("../controllers/conexion");
 
 const getItems = (req, res) => {
   conectar.execute(
