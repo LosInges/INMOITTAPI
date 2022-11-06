@@ -1,10 +1,11 @@
 const express = require('express');
-const postInmobiliaria = require('./postInmobiliaria');
-const getInmobiliaria = require('./getInmobiliaria');
-const deleteInmobiliaria = require('./deleteInmobiliaria');
+const postInmobiliaria = require('./post');
+const getInmobiliaria = require('./get');
+const deleteInmobiliaria = require('./delete');
 const router = express.Router();
 /// get
 router.get('/inmobiliaria/:correo', getInmobiliaria.getInmobiliaria);
+router.get('/inmobiliarias', getInmobiliaria.getInmobiliarias);
 router.get('/servicios', getInmobiliaria.getServicios);
 /// post
 router.post('/inmobiliaria', postInmobiliaria.postInmobiliaria);

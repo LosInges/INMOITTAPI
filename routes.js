@@ -1,13 +1,15 @@
 const express = require('express');
-const getFletes = require('./fletes/getFletes');
-const postFletes = require('./fletes/postFletes');
-const deleteFletes = require('./fletes/deleteFletes');
+const getFletes = require('./fletes/get');
+const postFletes = require('./fletes/post');
+const deleteFletes = require('./fletes/delete');
 const login = require('./controllers/login');
 const routerCliente = require('./clientes/routes');
 const routerInmobiliaria = require('./inmobiliarias/routes');
+const routerAgente = require('./agentes/routes')
 const router = express.Router();
 router.use(routerCliente);
 router.use(routerInmobiliaria);
+router.use(routerAgente);
 
 //SESSION
 router.get('/session', (req, res) => {
