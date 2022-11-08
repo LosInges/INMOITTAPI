@@ -15,6 +15,19 @@ const getInmobiliaria = (req, res) => {
   );
 };
 
+const getInmobiliarias = (req, res) => {
+  conectar.execute(
+    `SELECT * FROM inmobiliarias`,
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    }
+  );
+};
+
 const getServicios = (req, res) => {
   conectar.execute(
     'SELECT * FROM servicio',
@@ -30,5 +43,6 @@ const getServicios = (req, res) => {
 
 module.exports = {
   getInmobiliaria,
+  getInmobiliarias,
   getServicios,
 };

@@ -1,6 +1,6 @@
-const postCliente = require("./postCliente");
-const getCliente = require("./getCliente");
-const deleteCliente  = require("./deleteCliente");
+const postCliente = require("./post");
+const getCliente = require("./get");
+const deleteCliente  = require("./delete");
 const express = require("express");
 const router = express.Router();
 

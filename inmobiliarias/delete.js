@@ -26,7 +26,7 @@ const deleteInmobiliaria = (req, res) => {
   const deleteInmueble = (req, res) => {
     const queries = [
         {
-          query: "DELETE FROM inmueble WHERE ",
+          query: "DELETE FROM inmueble WHERE correo=?",
           params: [req.body.correo],
         },
         {
