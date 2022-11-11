@@ -1,8 +1,8 @@
-const conectar = require("../controllers/conexion");
+const conectar = require('../controllers/conexion');
 
 const postItem = (req, res) => {
   const query =
-    "INSERT INTO paquetes(id, id_item, foto, item, total, alto_item, ancho_item) VALUES (?,?,?,?,?,?,?)";
+    'INSERT INTO paquetes(id, id_item, foto, item, total, alto_item, ancho_item) VALUES (?,?,?,?,?,?,?)';
   const params = [
     req.body.id,
     req.body.id_item,
@@ -15,11 +15,11 @@ const postItem = (req, res) => {
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
@@ -27,7 +27,7 @@ const postCargador = (req, res) => {
   const queries = [
     {
       query:
-        "INSERT INTO cargadores(empresa, rfc, nombre, apellido, password, telefono, foto) VALUES (?,?,?,?,?,?,?)",
+        'INSERT INTO cargadores(empresa, rfc, nombre, apellido, password, telefono, foto) VALUES (?,?,?,?,?,?,?)',
       params: [
         req.body.empresa,
         req.body.rfc,
@@ -40,24 +40,24 @@ const postCargador = (req, res) => {
     },
     {
       query:
-        "INSERT INTO cuentas(correo, password, tipo, empresa) VALUES (?,?,?,?)",
-      params: [req.body.rfc, req.body.password, "cargador", req.body.empresa],
+        'INSERT INTO cuentas(correo, password, tipo, empresa) VALUES (?,?,?,?)',
+      params: [req.body.rfc, req.body.password, 'cargador', req.body.empresa],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
 const postTransporte = (req, res) => {
   const query =
-    "INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES (?,?,?,?)";
+    'INSERT INTO transportes(empresa, matricula, capacidad, activo) VALUES (?,?,?,?)';
   const params = [
     req.body.empresa,
     req.body.matricula,
@@ -67,11 +67,11 @@ const postTransporte = (req, res) => {
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
@@ -79,63 +79,86 @@ const postEmpresa = (req, res) => {
   const queries = [
     {
       query:
-        "INSERT INTO empresas_fletes(correo, nombre, password, telefono, estados) VALUES (?,?,?,?,?)",
+        'INSERT INTO empresas_fletes(correo, nombre, password, telefono, estados, logo) VALUES (?,?,?,?,?,?)',
       params: [
         req.body.correo,
         req.body.nombre,
         req.body.password,
         req.body.telefono,
         req.body.estados,
+        req.body.logo || '',
       ],
     },
     {
-      query: "INSERT INTO cuentas(correo, password, tipo) VALUES (?,?,?)",
-      params: [req.body.correo, req.body.password, "empresa"],
+      query: 'INSERT INTO cuentas(correo, password, tipo) VALUES (?,?,?)',
+      params: [req.body.correo, req.body.password, 'empresa'],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
 const postPrecarga = (req, res) => {
-  const query =
-    "INSERT INTO precarga(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-  const params = [
-    req.body.id,
-    req.body.cajas_chicas,
-    req.body.cajas_grandes,
-    req.body.cajas_medianas,
-    req.body.muebles,
-    req.body.empresa,
-    req.body.cliente,
-    req.body.destino,
-    req.body.fecha,
-    req.body.hora,
-    req.body.origen,
-    req.body.telefono,
+  const queries = [
+    {
+      query:
+        'INSERT INTO precarga(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+      params: [
+        req.body.id,
+        req.body.cajas_chicas,
+        req.body.cajas_grandes,
+        req.body.cajas_medianas,
+        req.body.muebles,
+        req.body.empresa,
+        req.body.cliente,
+        req.body.destino,
+        req.body.fecha,
+        req.body.hora,
+        req.body.origen,
+        req.body.telefono,
+      ],
+    },
+    {
+      query:
+        'INSERT INTO precarga_cliente(id, cajas_chicas, cajas_grandes, cajas_medianas, muebles, empresa, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+      params: [
+        req.body.id,
+        req.body.cajas_chicas,
+        req.body.cajas_grandes,
+        req.body.cajas_medianas,
+        req.body.muebles,
+        req.body.empresa,
+        req.body.cliente,
+        req.body.destino,
+        req.body.fecha,
+        req.body.hora,
+        req.body.origen,
+        req.body.telefono,
+      ],
+    },
   ];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
 const postTransporteFlete = (req, res) => {
-  console.log(req.body.flete)
+  console.log(req.body.flete);
   const query =
-    "INSERT INTO transporte_flete(flete, transporte, paquete, cargadores) VALUES (?,?,?,?)";
+    'INSERT INTO transporte_flete(flete, transporte, paquete, cargadores) VALUES (?,?,?,?)';
   const params = [
     req.body.flete,
     req.body.transporte,
@@ -145,11 +168,11 @@ const postTransporteFlete = (req, res) => {
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
@@ -157,7 +180,7 @@ const postFlete = (req, res) => {
   const queries = [
     {
       query:
-        "INSERT INTO fletes(activo, id, empresa, cliente, destino, telefono, origen, fecha, hora) VALUES (?,?,?,?,?,?,?,?,?)",
+        'INSERT INTO fletes(activo, id, empresa, cliente, destino, telefono, origen, fecha, hora) VALUES (?,?,?,?,?,?,?,?,?)',
       params: [
         true,
         req.body.id,
@@ -172,7 +195,7 @@ const postFlete = (req, res) => {
     },
     {
       query:
-        "INSERT INTO fletes_cliente(activo, cliente, empresa, id, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)",
+        'INSERT INTO fletes_cliente(activo, cliente, empresa, id, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)',
       params: [
         true,
         req.body.cliente,
@@ -187,7 +210,7 @@ const postFlete = (req, res) => {
     },
     {
       query:
-        "INSERT INTO fletes_empresa(activo, empresa, id, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)",
+        'INSERT INTO fletes_empresa(activo, empresa, id, cliente, destino, fecha, hora, origen, telefono) VALUES (?,?,?,?,?,?,?,?,?)',
       params: [
         true,
         req.body.empresa,
@@ -201,22 +224,22 @@ const postFlete = (req, res) => {
       ],
     },
     {
-      query: "DELETE FROM precarga WHERE empresa=? AND id=?",
+      query: 'DELETE FROM precarga WHERE empresa=? AND id=?',
       params: [req.body.empresa, req.body.id],
     },
     {
-      query: "DELETE FROM precarga_cliente WHERE cliente=? AND id=?",
+      query: 'DELETE FROM precarga_cliente WHERE cliente=? AND id=?',
       params: [req.body.cliente, req.body.id],
-    }
+    },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
-        .header("Access-Control-Allow-Origin", "*")
+        .header('Access-Control-Allow-Origin', '*')
         .json({ results: false, err });
       return;
     }
-    res.header("Access-Control-Allow-Origin", "*").json({ results: true });
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
 
