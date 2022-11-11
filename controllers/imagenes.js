@@ -7,7 +7,7 @@ const img = (req, res) => {
     .clone()
     .toFile(`public/img/${req.file.filename}`, (err, info) => {
       if (err) {
-        res.send({ err, ok: false });
+        res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
       } else {
         conexion.execute(
           'INSERT INTO imagenes_inmueble(titulo, ruta) VALUES(?,?)',
@@ -15,9 +15,9 @@ const img = (req, res) => {
           { prepare: true },
           (err, results) => {
             if (err) {
-              res.send({ err, ok: false });
+              res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
             } else {
-              res.send({ ok: true, path: `img/${req.file.filename}` });
+              res.header("Access-Control-Allow-Origin", "*").send({ ok: true, path: `img/${req.file.filename}` });
             }
           }
         );
@@ -40,15 +40,15 @@ const imgMiniatura = (req, res) => {
         { prepare: true },
         (err, results) => {
           if (err) {
-            res.send({ err, ok: false });
+            res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
           } else {
-            res.send({ ok: true, path: `img/${req.file.filename}` });
+            res.header("Access-Control-Allow-Origin", "*").send({ ok: true, path: `img/${req.file.filename}` });
           }
         }
       );
     })
     .catch((err) => {
-      res.send({ err, ok: false });
+      res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
     });
 };
 
@@ -57,9 +57,9 @@ const miniatura = (req, res) => {
     .resize(250, 250)
     .toFile(`public/img/miniaturas/${req.file.filename}`, (err, info) => {
       if (err) {
-        res.send({ err, ok: false });
+        res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
       } else {
-        res.send({ ok: true, path: `img/miniaturas/${req.file.filename}` });
+        res.header("Access-Control-Allow-Origin", "*").send({ ok: true, path: `img/miniaturas/${req.file.filename}` });
       }
     });
 };
