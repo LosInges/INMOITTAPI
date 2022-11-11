@@ -53,13 +53,13 @@ const imgMiniatura = (req, res) => {
 };
 
 const miniatura = (req, res) => {
-  sharp(`public/img/${req.body.img}`)
+  sharp(req.file.path)
     .resize(250, 250)
-    .toFile(`public/img/miniaturas/${req.body.img}`, (err, info) => {
+    .toFile(`public/img/miniaturas/${req.file.filename}`, (err, info) => {
       if (err) {
         res.send({ err, ok: false });
       } else {
-        res.send({ ok: true, path: `img/miniaturas/${req.body.img}` });
+        res.send({ ok: true, path: `img/miniaturas/${req.file.filename}` });
       }
     });
 };
