@@ -4,7 +4,7 @@ const postInmobiliaria = (req, res) => {
   const queries = [
     {
       query:
-        'INSERT INTO inmobiliarias (correo, estado, nombre, direccion, password, notarios, agentes) values (?,?,?,?,?,?,?)',
+        'INSERT INTO inmobiliarias (correo, estado, nombre, direccion, password, notarios, agentes, sedes, foto) values (?,?,?,?,?,?,?,?,?)',
       params: [
         req.body.correo,
         req.body.estado,
@@ -13,6 +13,8 @@ const postInmobiliaria = (req, res) => {
         req.body.password,
         req.body.notarios,
         req.body.agentes,
+        req.body.sedes,
+        req.body.foto
       ],
     },
     {
