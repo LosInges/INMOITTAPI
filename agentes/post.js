@@ -3,8 +3,8 @@ const conectar = require("../controllers/conexion");
 const postAgentes = (req, res) => {
   const queries = [
     {
-      query: "INSERT INTO cuentas (correo, password, tipo) values (?,?,?)",
-      params: [req.body.rfc, req.body.password, "agente"],
+      query: "INSERT INTO cuentas (correo, password, tipo, empresa) values (?,?,?,?)",
+      params: [req.body.rfc, req.body.password, "agente",req.body.inmobiliaria],
     },
 
     {

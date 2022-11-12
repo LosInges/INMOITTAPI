@@ -54,7 +54,7 @@ const imgMiniatura = (req, res) => {
 
 const miniatura = (req, res) => {
   sharp(req.file.path)
-    .resize(250, 250)
+    .resize(64, 64)
     .toFile(`public/img/miniaturas/${req.file.filename}`, (err, info) => {
       if (err) {
         res.header("Access-Control-Allow-Origin", "*").send({ err, ok: false });
