@@ -2,7 +2,7 @@ const sharp = require('sharp');
 
 const img = (req, res) => {
   sharp(req.file.path)
-    .clone()
+    .resize(256, 256)
     .toFile(`public/img/${req.file.filename}`, (err, info) => {
       if (err) {
         res.header('Access-Control-Allow-Origin', '*').send({ err, ok: false });
@@ -25,7 +25,9 @@ const imgMiniatura = (req, res) => {
     sharp(req.file.path)
       .resize(64, 64)
       .toFile(`public/img/miniaturas/${req.file.filename}`),
-    sharp(req.file.path).clone().toFile(`public/img/${req.file.filename}`),
+    sharp(req.file.path)
+      .resize(256, 256)
+      .toFile(`public/img/${req.file.filename}`),
   ];
   Promise.all(cargas)
     .then(() => {
