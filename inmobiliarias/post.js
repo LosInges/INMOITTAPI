@@ -30,27 +30,98 @@ const postInmobiliaria = (req, res) => {
 };
 
 const postInmueble = (req, res) => {
-  const query =
-    'INSERT INTO inmuebles(titulo, estado, cuartos, descripcion, direccion, foto, metros_cuadrados, notarios, pisos, precio_renta, precio_venta, servicios, agente, borrado, visible) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
-  const params = [
-    req.body.titulo,
-    req.body.estado,
-    req.body.cuartos,
-    req.body.descripcion, //text area
-    req.body.direccion, //objeto vacio
-    req.body.empresa, //
-    req.body.foto,
-    req.body.metros_cuadrados,
-    req.body.notarios, //arreglo
-    req.body.pisos, //
-    req.body.precio_renta,
-    req.body.precio_venta,
-    req.body.servicios,
-    req.body.agente, //
-    false,
-    true,
-  ];
-  conectar.execute(query, params, { prepare: true }, (err, results) => {
+  const queries = [
+    
+    { 
+      query: 'INSERT INTO INMUEBLES(inmobiliaria,proyecto,titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion,servicios, notario, agente, visible,borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ',
+      params: [
+        req.body.inmobiliaria,
+        req.body.proyecto,
+        req.body.titulo,
+        req.body.estado,
+        req.body.foto,
+        req.body.direccion,
+        req.body.precio_renta,
+        req.body.precio_venta,
+        req.body.cuartos,
+        req.body.pisos,
+        req.body.metros_cuadrados,
+        req.body.descripcion,
+        req.body.servicios,
+        req.body.notario,
+        req.body.agente,
+        req.body.visible,
+        req.body.borrado
+      ]
+    },
+    {
+      query: 'INSERT INTO INMUEBLES_AGENTE(inmobiliaria,proyecto,titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion,servicios, notario, agente, visible,borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ',
+      params: [
+        req.body.inmobiliaria,
+        req.body.proyecto,
+        req.body.titulo,
+        req.body.estado,
+        req.body.foto,
+        req.body.direccion,
+        req.body.precio_renta,
+        req.body.precio_venta,
+        req.body.cuartos,
+        req.body.pisos,
+        req.body.metros_cuadrados,
+        req.body.descripcion,
+        req.body.servicios,
+        req.body.notario,
+        req.body.agente,
+        req.body.visible,
+        req.body.borrado
+      ]
+    },
+    {
+      query: 'INSERT INTO INMUEBLES_PROYECTO(inmobiliaria,proyecto,titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion,servicios, notario, agente, visible,borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ',
+      params: [
+        req.body.inmobiliaria,
+        req.body.proyecto,
+        req.body.titulo,
+        req.body.estado,
+        req.body.foto,
+        req.body.direccion,
+        req.body.precio_renta,
+        req.body.precio_venta,
+        req.body.cuartos,
+        req.body.pisos,
+        req.body.metros_cuadrados,
+        req.body.descripcion,
+        req.body.servicios,
+        req.body.notario,
+        req.body.agente,
+        req.body.visible,
+        req.body.borrado
+      ]
+    },
+    {
+      query: 'INSERT INTO INMUEBLES_NOTARIO(inmobiliaria,proyecto,titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion,servicios, notario, agente, visible,borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ',
+      params: [
+        req.body.inmobiliaria,
+        req.body.proyecto,
+        req.body.titulo,
+        req.body.estado,
+        req.body.foto,
+        req.body.direccion,
+        req.body.precio_renta,
+        req.body.precio_venta,
+        req.body.cuartos,
+        req.body.pisos,
+        req.body.metros_cuadrados,
+        req.body.descripcion,
+        req.body.servicios,
+        req.body.notario,
+        req.body.agente,
+        req.body.visible,
+        req.body.borrado
+      ]
+    },
+  ]
+  conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')
@@ -60,6 +131,134 @@ const postInmueble = (req, res) => {
     res.header('Access-Control-Allow-Origin', '*').json({ results: true });
   });
 };
+
+const postProyecto = (req, res)=>{
+  conectar.execute(
+    'INSERT INTO PROYECTOS(inmobiliaria, nombre, ciudad, inicio) VALUES (?,?,?,?)',
+    [ 
+      req.body.inmobiliaria,
+      req.body.nombre,
+      req.body.ciudad,
+      req.body.inicio
+    ],
+    { prepare: true},
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  )
+}
+const postProyectoAgente = (req,res)=>{
+  conectar.execute(
+    'INSERT INTO PROYECTOS_AGENTE(inmobiliaria, agente, nombre, ciudad, inicio) VALUES(?,?,?,?,?)',
+    [
+       req.body.inmobiliaria,
+        req.body.agente,
+        req.body.nombre,
+        req.body.ciudad,
+        req.body.inicio
+    ],
+    {prepare: true},
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  )
+}
+
+const postNotarioProyecto = (req, res )=>{
+  conectar.execute(
+    'INSERT PROYECTOS_NOTARIO(inmobiliaria, notario, nombre, ciudad, inicio) VALUES(?,?,?,?,?)',
+    [
+       req.body.inmobiliaria,
+        req.body.notario,
+        req.body.nombre,
+        req.body.ciudad,
+        req.body.inicio
+    ],
+    {prepare: true},
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  )
+}
+
+const postInmuebleCliente = ()=>{
+  const queries = [
+    {
+       query:'INSERT INTO INMUEBLES_CLIENTE(cliente, inmobiliaria, proyecto, titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion, servicios, notario, agente, visible, borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+    params: [
+      req.body.cliente,
+      req.body.inmobiliaria,
+      req.body.proyecto,
+      req.body.titulo,
+      req.body.estado,
+      req.body.foto,
+      req.body.direccion,
+      req.body.precio_renta,
+      req.body.precio_venta,
+      req.body.cuartos,
+      req.body.pisos,
+      req.body.metros_cuadrados,
+      req.body.descripcion,
+      req.body.servicios,
+      req.body.notario,
+      req.body.agente,
+      req.body.visible,
+      req.body.borrado
+    ]
+    },
+    {
+      query:'INSERT INTO inmuebles_cliente_inmobiliaria(cliente, inmobiliaria, proyecto, titulo, estado, foto, direccion, precio_renta, precio_venta, cuartos, pisos, metros_cuadrados, descripcion, servicios, notario, agente, visible, borrado) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+      params: [
+        req.body.cliente,
+        req.body.inmobiliaria,
+        req.body.proyecto,
+        req.body.titulo,
+        req.body.estado,
+        req.body.foto,
+        req.body.direccion,
+        req.body.precio_renta,
+        req.body.precio_venta,
+        req.body.cuartos,
+        req.body.pisos,
+        req.body.metros_cuadrados,
+        req.body.descripcion,
+        req.body.servicios,
+        req.body.notario,
+        req.body.agente,
+        req.body.visible,
+        req.body.borrado
+      ]
+    }
+  
+  ]
+  conectar.batch(queries, { prepare: true }, (err, results) => {
+    if (err) {
+      res
+        .header('Access-Control-Allow-Origin', '*')
+        .json({ results: false, err });
+      return;
+    }
+    res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+  });
+}
 
 const postServicio = (req, res) => {
   conectar.execute(
@@ -106,4 +305,8 @@ module.exports = {
   postInmueble,
   postServicio,
   postNotario,
+  postProyectoAgente,
+  postProyecto,
+  postNotarioProyecto,
+  postInmuebleCliente,
 };
