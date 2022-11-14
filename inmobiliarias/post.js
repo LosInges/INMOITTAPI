@@ -4,17 +4,15 @@ const postInmobiliaria = (req, res) => {
   const queries = [
     {
       query:
-        'INSERT INTO inmobiliarias (correo, estado, nombre, direccion, password, notarios, agentes, sedes, foto) values (?,?,?,?,?,?,?,?,?)',
+        'INSERT INTO inmobiliarias (correo, estado, nombre, direccion, password, sedes, foto) values (?,?,?,?,?,?,?)',
       params: [
         req.body.correo,
         req.body.estado,
         req.body.nombre,
         req.body.direccion,
         req.body.password,
-        req.body.notarios,
-        req.body.agentes,
         req.body.sedes,
-        req.body.foto
+        req.body.foto,
       ],
     },
     {
@@ -80,8 +78,32 @@ const postServicio = (req, res) => {
   );
 };
 
+const postNotario = (req, res) => {
+  conectar.execute(
+    'INSERT INTO notario(inmobiliaria, rfc, nombre, apellido, correo, foto) VALUES(?,?,?,?,?,?)',
+    [
+      req.body.inmobiliaria,
+      req.body.rfc,
+      req.body.nombre,
+      req.body.apellido,
+      req.body.correo,
+      req.body.foto,
+    ],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  );
+};
 module.exports = {
   postInmobiliaria,
   postInmueble,
   postServicio,
+  postNotario,
 };
