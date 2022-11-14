@@ -30,4 +30,18 @@ const getAgentes = (req, res) => {
   );
 };
 
-module.exports = { getAgente, getAgentes };
+const getInmueblesAgente = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM inmuebles_agente WHERE agente=?',
+    [req.params.agente],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    }
+  );
+};
+module.exports = { getAgente, getAgentes, getInmueblesAgente };
