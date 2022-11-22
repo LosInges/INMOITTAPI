@@ -211,7 +211,7 @@ const postNotarioProyecto = (req, res) => {
   });
 };
 
-const postInmuebleCliente = () => {
+const postInmuebleCliente = (req, res) => {
   const queries = [
     {
       query:
@@ -313,6 +313,23 @@ const postNotario = (req, res) => {
     }
   );
 };
+
+const postImagenInmueble = (req, res) => {
+  conectar.execute(
+    'INSERT INTO imagenes_inmueble(titulo, inmobiliaria, proyecto, ruta) VALUES(?,?,?,?)',
+    [req.body.titulo, req.body.inmobiliaria, req.body.proyecto, req.body.ruta],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  );
+};
 module.exports = {
   postInmobiliaria,
   postInmueble,
@@ -322,4 +339,5 @@ module.exports = {
   postProyecto,
   postNotarioProyecto,
   postInmuebleCliente,
+  postImagenInmueble,
 };

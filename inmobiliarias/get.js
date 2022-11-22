@@ -81,7 +81,7 @@ const getInmueblesProyecto = (req, res) => {
 
 const getInmueble = (req, res) => {
   conectar.execute(
-    'SELECT * FROM inmueble WHERE inmobiliaria = ? AND PROYECTO =? AND titulo=?',
+    'SELECT * FROM inmuebles WHERE inmobiliaria = ? AND PROYECTO =? AND titulo=?',
     [req.params.inmobiliaria, req.params.proyecto, req.params.titulo],
     { prepare: true },
     (err, results) => {
@@ -89,7 +89,7 @@ const getInmueble = (req, res) => {
         res.header('Access-Control-Allow-Origin', '*').json({ err });
         return;
       }
-      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows[0]);
     }
   );
 };
@@ -156,7 +156,7 @@ const getProyectoInmobiliaria = (req, res) => {
 
 const getProyectosNotario = (req, res) => {
   conectar.execute(
-    'SELECT * FROM proyectos_notarios WHERE notario=?',
+    'SELECT * FROM proyectos_notario WHERE notario=?',
     [req.params.notario],
     { prepare: true },
     (err, results) => {
@@ -184,7 +184,7 @@ const getNotariosProyecto = (req, res) => {
   );
 };
 
-const getInmueblesNotario = (req, res) => {
+const getInmueblesProyectoNotario = (req, res) => {
   conectar.execute(
     'SELECT * FROM inmuebles_notario WHERE notario=? AND inmobiliaria=? AND proyecto=?',
     [req.params.notario, req.params.inmobiliaria, req.params.proyecto],
@@ -201,8 +201,68 @@ const getInmueblesNotario = (req, res) => {
 
 const getInmueblesAgente = (req, res) => {
   conectar.execute(
-    'SLECT * FROM inmuebles_agente WHERE agente=? AND inmobiliaria=? AND proyecto=?',
+    'SELECT * FROM inmuebles_agente WHERE agente=? AND inmobiliaria=? AND proyecto=?',
     [req.params.agente, req.params.inmobiliaria, req.params.proyecto],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    }
+  );
+};
+
+const getClientesInmueble = (req, res) => {
+  conectar.execute(
+    'SELECT cliente FROM inmuebles_cliente_inmobiliaria WHERE inmobiliaria=? AND proyecto=? AND titulo=?',
+    [req.params.inmobiliaria, req.params.proyecto, req.params.titulo],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows); //
+    }
+  );
+};
+
+const getInmueblesNotario = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM inmuebles_notario WHERE notario=?',
+    [req.params.notario],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    }
+  );
+};
+
+const getInmueblesCliente = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM inmuebles_cliente WHERE cliente=?',
+    [req.params.cliente],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res.header('Access-Control-Allow-Origin', '*').json({ err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').send(results.rows);
+    }
+  );
+};
+
+const getImagenesInmueble = (req, res) => {
+  conectar.execute(
+    'SELECT * FROM imagenes_inmueble WHERE inmobiliaria=? AND proyecto=? AND titulo=?',
+    [req.params.inmobiliaria, req.params.proyecto, req.params.titulo],
     { prepare: true },
     (err, results) => {
       if (err) {
@@ -220,7 +280,7 @@ module.exports = {
   getServicios,
   getNotarios,
   getNotario,
-  getInmueblesNotario,
+  getInmueblesProyectoNotario,
   getInmueblesProyecto,
   getInmueble,
   getProyectosNotario,
@@ -230,4 +290,8 @@ module.exports = {
   getProyectosInmobiliaria,
   getProyectoInmobiliaria,
   getInmueblesAgente,
+  getClientesInmueble,
+  getInmueblesNotario,
+  getInmueblesCliente,
+  getImagenesInmueble
 };

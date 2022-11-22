@@ -14,7 +14,11 @@ router.use(routerFletes);
 
 //LOGIN
 router.post('/login', login.login);
-router.get('/logout', login.logout);
+router.get('/solicitar/registro/:correo', login.solicitarRegistro);
+router.get(
+  '/solicitar/registro/notario/:inmobiliaria/:rfc',
+  login.solicitarRegistroNotario
+);
 
 //IMAGENES
 router.post('/img/miniatura', imagenes.imgMiniatura);

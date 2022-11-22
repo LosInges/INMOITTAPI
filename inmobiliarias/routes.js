@@ -23,12 +23,14 @@ router.get(
 );
 router.get(
   '/inmuebles/notario/:notario/:inmobiliaria/:proyecto',
-  getInmobiliaria.getInmueblesNotario
+  getInmobiliaria.getInmueblesProyectoNotario
 );
+router.get('/inmuebles/notario/:notario', getInmobiliaria.getInmueblesNotario);
 router.get(
   '/inmuebles/agente/:agente/:inmobiliaria/:proyecto',
   getInmobiliaria.getInmueblesAgente
 );
+router.get('/inmuebles/cliente/:cliente', getInmobiliaria.getInmueblesCliente);
 router.get('/servicios', getInmobiliaria.getServicios);
 router.get('/proyectos/notario/:notario', getInmobiliaria.getProyectosNotario);
 router.get('/proyectos/agente/:agente', getInmobiliaria.getProyectosAgente);
@@ -40,6 +42,15 @@ router.get(
   '/proyecto/inmobiliaria/:inmobiliaria/:nombre',
   getInmobiliaria.getProyectoInmobiliaria
 );
+router.get(
+  '/inmueble/:inmobiliaria/:proyecto/:titulo',
+  getInmobiliaria.getInmueble
+);
+router.get(
+  '/clientes/inmueble/:inmobiliaria/:proyecto/:titulo',
+  getInmobiliaria.getClientesInmueble
+);
+router.get('/imagenes/inmueble/:inmobiliaria/:proyecto/:titulo', getInmobiliaria.getImagenesInmueble);
 
 /// post
 router.post('/inmobiliaria', postInmobiliaria.postInmobiliaria);
@@ -50,6 +61,7 @@ router.post('/agente/proyecto', postInmobiliaria.postAgenteProyecto);
 router.post('/proyecto', postInmobiliaria.postProyecto);
 router.post('/notario/proyecto', postInmobiliaria.postNotarioProyecto);
 router.post('/inmueble/cliente', postInmobiliaria.postInmuebleCliente);
+router.post('/img/inmueble', postInmobiliaria.postImagenInmueble);
 
 /// delete
 router.delete('/inmobiliaria', deleteInmobiliaria.deleteInmobiliaria);
@@ -59,5 +71,6 @@ router.delete('/inmueble/cliente', deleteInmobiliaria.deleteInmuebleCliente);
 router.delete('/proyecto', deleteInmobiliaria.deleteProyecto);
 router.delete('/notario/proyecto', deleteInmobiliaria.deleteNotarioProyecto);
 router.delete('/agente/proyecto', deleteInmobiliaria.deleteAgenteProyecto);
+router.delete('/img/inmueble', deleteInmobiliaria.deleteImagenInmueble);
 
 module.exports = router;

@@ -10,7 +10,7 @@ const getCliente = (req, res) => {
         res.header("Access-Control-Allow-Origin", "*").json({ err });
         return;
       }
-      res.header("Access-Control-Allow-Origin", "*").send(results.rows[0]);
+      res.header("Access-Control-Allow-Origin", "*").status(200).send(results.rows[0]);
     }
   );
 };

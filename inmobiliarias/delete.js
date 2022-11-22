@@ -67,10 +67,11 @@ const deleteInmueble = (req, res) => {
 };
 
 const deleteInmuebleCliente = (req, res) => {
+  console.log(req.body);
   const queries = [
     {
       query:
-        'UPDATE inmuebles_cliente_inmobiliaria SET borrado=true WHERE inmobiliaria=? AND proyecto=? AND titulo=? AND cliente=?',
+        'DELETE FROM inmuebles_cliente_inmobiliaria WHERE inmobiliaria=? AND proyecto=? AND titulo=? AND cliente=?',
       params: [
         req.body.inmobiliaria,
         req.body.proyecto,
@@ -80,7 +81,7 @@ const deleteInmuebleCliente = (req, res) => {
     },
     {
       query:
-        'UPDATE inmuebles_cliente SET borrado=true WHERE cliente=? AND inmobiliaria=? AND proyecto=? AND titulo=?',
+        'DELETE FROM inmuebles_cliente WHERE cliente=? AND inmobiliaria=? AND proyecto=? AND titulo=?',
       params: [
         req.body.cliente,
         req.body.inmobiliaria,
@@ -101,6 +102,7 @@ const deleteInmuebleCliente = (req, res) => {
 };
 
 const deleteNotario = (req, res) => {
+  console.log(req.body);
   conectar.execute(
     'DELETE FROM notario WHERE inmobiliaria=? AND rfc=?',
     [req.body.inmobiliaria, req.body.rfc],
@@ -122,11 +124,6 @@ const deleteProyecto = (req, res) => {
     {
       query: 'DELETE FROM proyectos WHERE inmobiliaria=? AND nombre=?',
       params: [req.body.inmobiliaria, req.body.nombre],
-    },
-    {
-      query:
-        'UPDATE inmuebles_proyecto SET borrado=true WHERE proyecto=? AND inmobiliaria=?',
-      params: [req.body.nombre, req.body.inmobiliaria],
     },
   ];
   conectar.batch(queries, { prepare: true }, (err, results) => {
@@ -152,11 +149,6 @@ const deleteAgenteProyecto = (req, res) => {
         'DELETE FROM proyectos_agente WHERE agente=? AND inmobiliaria=? AND nombre=?',
       params: [req.body.agente, req.body.inmobiliaria, req.body.nombre],
     },
-    {
-      query:
-        'UPDATE inmuebles_agente SET borrado=true WHERE agente=? AND inmobiliaria=? AND proyecto=?',
-      params: [req.body.agente, req.body.inmobiliaria, req.body.nombre],
-    },
   ];
 
   conectar.batch(queries, { prepare: true }, (err, results) => {
@@ -171,6 +163,7 @@ const deleteAgenteProyecto = (req, res) => {
 };
 
 const deleteNotarioProyecto = (req, res) => {
+  console.log(req.body)
   const queries = [
     {
       query:
@@ -182,14 +175,10 @@ const deleteNotarioProyecto = (req, res) => {
         'DELETE FROM proyectos_notario WHERE notario=? AND inmobiliaria=? AND nombre=?',
       params: [req.body.notario, req.body.inmobiliaria, req.body.nombre],
     },
-    {
-      query:
-        'UPDATE inmuebles_notario SET borrado=true WHERE notario=? AND inmobiliaria=? AND proyecto=?',
-      params: [req.body.notario, req.body.inmobiliaria, req.body.nombre],
-    },
   ];
 
   conectar.batch(queries, { prepare: true }, (err, results) => {
+    console.log(err, results)
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')
@@ -200,6 +189,27 @@ const deleteNotarioProyecto = (req, res) => {
   });
 };
 
+const deleteImagenInmueble = (req, res) => {
+  conectar.execute(
+    'DELETE FROM imagenes_inmueble WHERE inmobiliaria=? AND proyecto=? AND titulo=? AND ruta=?',
+    [
+      req.body.inmobiliaria,
+      req.body.proyecto,
+      req.body.titulo,
+      req.body.ruta,
+    ],
+    { prepare: true },
+    (err, results) => {
+      if (err) {
+        res
+          .header('Access-Control-Allow-Origin', '*')
+          .json({ results: false, err });
+        return;
+      }
+      res.header('Access-Control-Allow-Origin', '*').json({ results: true });
+    }
+  );
+};
 module.exports = {
   deleteInmobiliaria,
   deleteInmueble,
@@ -208,4 +218,5 @@ module.exports = {
   deleteProyecto,
   deleteAgenteProyecto,
   deleteNotarioProyecto,
+  deleteImagenInmueble
 };

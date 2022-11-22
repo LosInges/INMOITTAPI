@@ -156,7 +156,7 @@ const postPrecarga = (req, res) => {
 };
 
 const postTransporteFlete = (req, res) => {
-  console.log(req.body.flete);
+  
   const query =
     'INSERT INTO transporte_flete(flete, transporte, paquete, cargadores) VALUES (?,?,?,?)';
   const params = [

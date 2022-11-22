@@ -13,6 +13,7 @@ router.post("/precargaCliente", postCliente.postPrecargaCliente);
 
 //DELETE
 router.delete("/cliente",deleteCliente.deleteCliente);
+router.delete("/precarga/cliente",deleteCliente.deletePrecargaCliente);
 
 
 
