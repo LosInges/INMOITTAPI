@@ -5,8 +5,14 @@ const session = require("express-session");
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const multer = require('multer');
+const fs = require('fs');
+const https = require('https');
 const routes = require('./routes');
 //const DataRoutes = require("./api/routes");
+
+const key = fs.readFileSync('/etc/letsencrypt/live/inmobitt.tk/privkey.pem');
+const cert = fs.readFileSync('/etc/letsencrypt/live/inmobitt.tk/fullchain.pem');
+const credentials = {key, cert};
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -21,12 +27,12 @@ const storage = multer.diskStorage({
 const app = express();
 
 // settings
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 443);
 
 //middlewares
 app.use(multer({ storage }).single('img'));
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan('short'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
@@ -41,8 +47,7 @@ app.use(routes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
-
 // start the server
-app.listen(app.get('port'), () => {
+https.createServer(credentials, app).listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
