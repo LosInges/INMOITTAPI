@@ -2,7 +2,7 @@ const conectar = require('../controllers/conexion');
 
 const postItem = (req, res) => {
   const query =
-    'INSERT INTO paquetes(id, id_item, foto, item, total, alto_item, ancho_item) VALUES (?,?,?,?,?,?,?)';
+    'INSERT INTO paquetes(id, id_item, foto, item, total, alto_item, ancho_item, profundidad) VALUES (?,?,?,?,?,?,?,?)';
   const params = [
     req.body.id,
     req.body.id_item,
@@ -11,6 +11,7 @@ const postItem = (req, res) => {
     req.body.total,
     req.body.alto_item,
     req.body.ancho_item,
+    req.body.profundidad,
   ];
   conectar.execute(query, params, { prepare: true }, (err, results) => {
     if (err) {
