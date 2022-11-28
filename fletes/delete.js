@@ -57,7 +57,6 @@ const deleteCargador = (req, res) => {
   conectar.batch(queries, { prepare: true }, (err, results) => {
     if (err) {
       res.header("Access-Control-Allow-Origin", "*").json({ err });
-      console.log(err);
       return;
     }
     res.header("Access-Control-Allow-Origin", "*").json({ results: true });

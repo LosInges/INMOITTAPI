@@ -1,7 +1,6 @@
 const conexion = require('./conexion');
 
 const login = (req, res) => {
-  console.log(req.body);
   conexion.execute(
     'SELECT * FROM cuentas WHERE correo=?',
     [req.body.email],

@@ -35,7 +35,6 @@ const postCliente = (req, res) => {
 };
 
 const postPrecargaCliente =(req, res)=>{
-  console.log(req.body)
   const queries = [
     {
       query:

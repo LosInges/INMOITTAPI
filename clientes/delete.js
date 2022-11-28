@@ -21,7 +21,6 @@ const deleteCliente = (req, res) => {
 };
 
 const deletePrecargaCliente = (req, res) => {
-  console.log(req.body);
   const queries = [
     {
       query: 'DELETE FROM precarga_cliente WHERE cliente = ? AND id = ?',

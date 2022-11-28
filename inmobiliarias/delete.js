@@ -67,7 +67,6 @@ const deleteInmueble = (req, res) => {
 };
 
 const deleteInmuebleCliente = (req, res) => {
-  console.log(req.body);
   const queries = [
     {
       query:
@@ -102,7 +101,6 @@ const deleteInmuebleCliente = (req, res) => {
 };
 
 const deleteNotario = (req, res) => {
-  console.log(req.body);
   conectar.execute(
     'DELETE FROM notario WHERE inmobiliaria=? AND rfc=?',
     [req.body.inmobiliaria, req.body.rfc],
@@ -163,7 +161,6 @@ const deleteAgenteProyecto = (req, res) => {
 };
 
 const deleteNotarioProyecto = (req, res) => {
-  console.log(req.body)
   const queries = [
     {
       query:
@@ -178,7 +175,6 @@ const deleteNotarioProyecto = (req, res) => {
   ];
 
   conectar.batch(queries, { prepare: true }, (err, results) => {
-    console.log(err, results)
     if (err) {
       res
         .header('Access-Control-Allow-Origin', '*')
@@ -192,12 +188,7 @@ const deleteNotarioProyecto = (req, res) => {
 const deleteImagenInmueble = (req, res) => {
   conectar.execute(
     'DELETE FROM imagenes_inmueble WHERE inmobiliaria=? AND proyecto=? AND titulo=? AND ruta=?',
-    [
-      req.body.inmobiliaria,
-      req.body.proyecto,
-      req.body.titulo,
-      req.body.ruta,
-    ],
+    [req.body.inmobiliaria, req.body.proyecto, req.body.titulo, req.body.ruta],
     { prepare: true },
     (err, results) => {
       if (err) {
@@ -218,5 +209,5 @@ module.exports = {
   deleteProyecto,
   deleteAgenteProyecto,
   deleteNotarioProyecto,
-  deleteImagenInmueble
+  deleteImagenInmueble,
 };
